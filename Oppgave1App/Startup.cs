@@ -28,6 +28,9 @@ namespace Oppgave1App
 
             app.UseRouting();
 
+            //Denne lar oss bruke filene under wwwroot
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
