@@ -31,6 +31,8 @@ namespace Oppgave1App
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //Dette initialiserer databasen med DBInit
+                DBInit.Initialize(app); 
             }
 
             app.UseRouting();
