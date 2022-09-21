@@ -7,5 +7,6 @@ namespace Oppgave1App.Models
 {
     public class Oppgave1
     {
+        public String Info { get; set; }
     }
 }
