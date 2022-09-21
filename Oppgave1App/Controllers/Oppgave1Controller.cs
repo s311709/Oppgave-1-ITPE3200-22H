@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Oppgave1App.DAL;
 using Oppgave1App.Models;
 using System;
@@ -13,10 +14,13 @@ namespace Oppgave1App.Controllers
     public class Oppgave1Controller : ControllerBase
     {
         private readonly Oppgave1Context _db;
+        private ILogger<Oppgave1Controller> _log;
 
-        public Oppgave1Controller(Oppgave1Context db)
+
+        public Oppgave1Controller(Oppgave1Context db, ILogger<Oppgave1Controller> log)
         {
             _db = db;
+            _log = log;
         }
 
         public List<Oppgave1> HentAlle()

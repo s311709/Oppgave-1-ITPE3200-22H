@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Oppgave1App.DAL;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,13 @@ namespace Oppgave1App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //Denne oppdretter en logg under /Logs
+                loggerFactory.AddFile("Logs/Logg.txt");
                 //Dette initialiserer databasen med DBInit
                 DBInit.Initialize(app); 
             }
