@@ -13,21 +13,21 @@ namespace Oppgave1App.Controllers
     [Route("[controller]/[action]")]
     public class Oppgave1Controller : ControllerBase
     {
-        private readonly Oppgave1Context _db;
+        private readonly IOppgave1Repository _db;
         private ILogger<Oppgave1Controller> _log;
 
 
-        public Oppgave1Controller(Oppgave1Context db, ILogger<Oppgave1Controller> log)
+        public Oppgave1Controller(IOppgave1Repository db, ILogger<Oppgave1Controller> log)
         {
             _db = db;
             _log = log;
         }
 
-        public List<Oppgave1> HentAlle()
+        public async Task<ActionResult> HentAlle()
         {
-            List<Oppgave1> alleOppgave1ene = _db.Oppgave1er.ToList();
+            List<Oppgave1> alleOppgave1ene = await _db.HentAlle();
 
-            return alleOppgave1ene;
+            return Ok(alleOppgave1ene);
 
         }
     }

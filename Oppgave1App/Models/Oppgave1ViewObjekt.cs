@@ -7,6 +7,7 @@ namespace Oppgave1App.Models
 {
     public class Oppgave1ViewObjekt
     {
+        public int Id { get; set; }
         public String Info { get; set; }
     }
 }

@@ -24,6 +24,8 @@ namespace Oppgave1App
             //Denne lar oss bruke contexten//databasen
             services.AddDbContext<Oppgave1Context>(options =>
                             options.UseSqlite("Data Source = Oppgave1.db"));
+            //Denne gjør at vi kan bruke IRepository
+            services.AddScoped<IOppgave1Repository, Oppgave1Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Oppgave1App.DAL
 {
-    public class IOppgave1Repository
+    public interface IOppgave1Repository
     {
+        Task <List<Oppgave1>> HentAlle();
     }
 }
