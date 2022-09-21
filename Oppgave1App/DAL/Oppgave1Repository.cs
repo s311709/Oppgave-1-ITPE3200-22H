@@ -22,10 +22,7 @@ namespace Oppgave1App.DAL
 
         public async Task <List<Oppgave1>> HentAlle()
         {
-            Console.WriteLine("Kommet hit1.");
-
             List<Oppgave1> alleOppgave1ene = await _db.Oppgave1er.ToListAsync();
-            Console.WriteLine("Kommet hit2.");
             return alleOppgave1ene;
 
         }
