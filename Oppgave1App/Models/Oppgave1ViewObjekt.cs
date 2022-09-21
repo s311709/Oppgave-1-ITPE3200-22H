@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Oppgave1App.DAL
+namespace Oppgave1App.Models
 {
-    public class Oppave1Context
+    public class Oppgave1ViewObjekt
     {
+        public String Info { get; set; }
     }
 }

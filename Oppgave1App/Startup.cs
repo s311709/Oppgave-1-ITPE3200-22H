@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Oppgave1App.DAL;
@@ -19,6 +20,9 @@ namespace Oppgave1App
         {
             //Denne lar oss bruke controlleren
             services.AddControllers();
+            //Denne lar oss bruke contexten//databasen
+            services.AddDbContext<Oppgave1Context>(options =>
+                            options.UseSqlite("Data Source = Oppgave1.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

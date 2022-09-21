@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Oppgave1App.DAL;
 using Oppgave1App.Models;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,18 @@ namespace Oppgave1App.Controllers
     [Route("[controller]/[action]")]
     public class Oppgave1Controller : ControllerBase
     {
+        private readonly Oppgave1Context _db;
+
+        public Oppgave1Controller(Oppgave1Context db)
+        {
+            _db = db;
+        }
+
         public List<Oppgave1> HentAlle()
         {
-            var oppgave1ene = new List<Oppgave1>();
-            var oppgave1element = new Oppgave1
-            {
-                Info = "Dette er info"
-            };
-            var oppgave1element2 = new Oppgave1
-            {
-                Info = "Dette er info igjen"
-            };
+            List<Oppgave1> alleOppgave1ene = _db.Oppgave1er.ToList();
 
-            oppgave1ene.Add(oppgave1element);
-            oppgave1ene.Add(oppgave1element2);
-
-            return oppgave1ene;
+            return alleOppgave1ene;
 
         }
     }
