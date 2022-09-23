@@ -1,20 +1,26 @@
 ﻿$(function () {
-    $.get("UFO/HentAlle", function (oppgave1er) {
-        formaterOppgaver(oppgave1er);
+    $.get("UFO/HentAlle", function (observasjoner) {
+        formaterObservasjoner(observasjoner);
     });
 });
 
-function formaterOppgaver(oppgave1er) {
+function formaterObservasjoner(observasjoner) {
     let ut = "<table class='table'>" +
         "<tr>" +
-        "<th>Test</th>" +
+        "<th>UFO</th><th>Tidspunkt</th>" +
+        "<th>Kommune</th><th>Beskrivelse</th><th>Observatør</th>" +
         "</tr>";
-    for (let oppgave of oppgave1er) {
+    for (let observasjon of observasjoner) {
         ut += "<tr>" +
-            "<td>" + oppgave.info + "</td>" +
-            
+            "<td>" + observasjon.kallenavnUFO + "</td>" +
+            "<td>" + observasjon.tidspunktObservert + "</td>" +
+            "<td>" + observasjon.kommuneObservert + "</td>" +
+            "<td>" + observasjon.beskrivelseAvObservasjon + "</td>" +
+            "<td>" + observasjon.fornavnObservatør + " " + observasjon.etternavnObservatør + "</td>" +
+            "<td> <a class='btn btn-primary' href='endreObservasjon.html?id=" + observasjon.id + "'>Endre</a></td>" +
+            "<td><button class='btn btn-danger' onclick='slettObservasjon(" + observasjon.id + ")'>Slett</button></td>" +
             "</tr>";
     }
     ut += "</table>";
-    $("#test").html(ut);
+    $("#observasjoner").html(ut);
 }

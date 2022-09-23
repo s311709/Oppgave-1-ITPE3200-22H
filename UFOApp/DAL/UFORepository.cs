@@ -23,19 +23,25 @@ namespace UFOApp.DAL
 
         public async Task <List<Observasjon>> HentAlle()
         {
-            List<UFO> UFOer = await _db.UFOer.ToListAsync();
+            List<EnkeltObservasjon> alleEnkeltObservasjoner = await _db.EnkeltObservasjoner.ToListAsync();
 
             List<Observasjon> alleObservasjoner = new List<Observasjon>();
 
-            foreach (var UFO in UFOer)
+            foreach (var enkeltObservasjon in alleEnkeltObservasjoner)
             {
+                //Har valgt å ikke ta med alle atributtene, kan dette være i en egen siden hvor man får mer info om hver observasjon?
                 var enObservasjon = new Observasjon
                 {
-                    Info = UFO.Info
+                    Id = enkeltObservasjon.Id,
+                    KallenavnUFO = enkeltObservasjon.ObservertUFO.Kallenavn,
+                    TidspunktObservert = enkeltObservasjon.TidspunktObservert,
+                    KommuneObservert = enkeltObservasjon.KommuneObservert,
+                    BeskrivelseAvObservasjon = enkeltObservasjon.BeskrivelseAvObservasjon,
+                    FornavnObservatør = enkeltObservasjon.Observatør.Fornavn,
+                    EtternavnObservatør = enkeltObservasjon.Observatør.Etternavn
                 };
                 alleObservasjoner.Add(enObservasjon);
             }
-
             return alleObservasjoner;
 
         }
