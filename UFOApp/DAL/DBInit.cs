@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Oppgave1App.DAL
+namespace UFOApp.DAL
 {
     public class DBInit
     {
@@ -13,17 +13,17 @@ namespace Oppgave1App.DAL
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetService<Oppgave1Context>();
+                var context = serviceScope.ServiceProvider.GetService<UFOContext>();
 
                 //sletter og oppretter databasen for seeding
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                var oppgave1 = new Oppgave1
+                var oppgave1 = new UFO
                 {
                     Info = "dette er 1"
                 };
-                var oppgave2 = new Oppgave1
+                var oppgave2 = new UFO
                 {
                     Info = "dette er 2"
                 };

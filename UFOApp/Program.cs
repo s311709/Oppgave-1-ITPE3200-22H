@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Oppgave1App
+namespace UFOApp
 {
     public class Program
     {

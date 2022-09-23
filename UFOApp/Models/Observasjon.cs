@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Oppgave1App.Models
+namespace UFOApp.Models
 {
-    public class Oppgave1ViewObjekt
+    public class Observasjon
     {
         public int Id { get; set; }
         public String Info { get; set; }

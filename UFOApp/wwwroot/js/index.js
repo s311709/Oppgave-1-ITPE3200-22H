@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $.get("oppgave1/HentAlle", function (oppgave1er) {
+    $.get("UFO/HentAlle", function (oppgave1er) {
         formaterOppgaver(oppgave1er);
     });
 });

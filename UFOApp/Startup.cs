@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Oppgave1App.DAL;
+using UFOApp.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Oppgave1App
+namespace UFOApp
 {
     public class Startup
     {
@@ -22,10 +22,10 @@ namespace Oppgave1App
             //Denne lar oss bruke controlleren
             services.AddControllers();
             //Denne lar oss bruke contexten//databasen
-            services.AddDbContext<Oppgave1Context>(options =>
-                            options.UseSqlite("Data Source = Oppgave1.db"));
+            services.AddDbContext<UFOContext>(options =>
+                            options.UseSqlite("Data Source = UFO.db"));
             //Denne gjør at vi kan bruke IRepository
-            services.AddScoped<IOppgave1Repository, Oppgave1Repository>();
+            services.AddScoped<IUFORepository, UFORepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +35,7 @@ namespace Oppgave1App
             {
                 app.UseDeveloperExceptionPage();
                 //Denne oppdretter en logg under /Logs
-                loggerFactory.AddFile("Logs/Logg.txt");
+                loggerFactory.AddFile("Logs/UFOLogg.txt");
                 //Dette initialiserer databasen med DBInit
                 DBInit.Initialize(app); 
             }

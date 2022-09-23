@@ -5,27 +5,27 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Oppgave1App.DAL
+namespace UFOApp.DAL
 {
 
-    public class Oppgave1
+    public class UFO
     {
         [Key]
         public int Id { get; set; }
         public string Info { get; set; }
     }
 
-    public class Oppgave1Context : DbContext
+    public class UFOContext : DbContext
     {
 
         //oppretter databasen
-        public Oppgave1Context(DbContextOptions<Oppgave1Context> options) :
+        public UFOContext(DbContextOptions<UFOContext> options) :
             base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<Oppgave1> Oppgave1er { get; set; }
+        public DbSet<UFO> UFOer { get; set; }
 
     }
 
