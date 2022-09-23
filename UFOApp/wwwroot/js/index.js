@@ -8,7 +8,7 @@ function formaterObservasjoner(observasjoner) {
     let ut = "<table class='table'>" +
         "<tr>" +
         "<th>UFO</th><th>Tidspunkt</th>" +
-        "<th>Kommune</th><th>Beskrivelse</th><th>Observatør</th>" +
+        "<th>Kommune</th><th>Beskrivelse</th><th>Observatør</th><th></th><th></th>" +
         "</tr>";
     for (let observasjon of observasjoner) {
         ut += "<tr>" +
