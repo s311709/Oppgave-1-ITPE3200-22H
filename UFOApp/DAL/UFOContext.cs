@@ -17,19 +17,24 @@ namespace UFOApp.DAL
         //Når denne er virtual lastes observatøren inn samtidig med EnkeltObservasjon med bruk av lazy loading
         virtual public Observatør Observatør { get; set; }
 
-        virtual public UFO UfoObservert { get; set; }
+        //Når denne er virtual lastes observatøren inn samtidig med EnkeltObservasjon med bruk av lazy loading
+        virtual public UFO ObservertUFO { get; set; }
     }
     public class UFO
     {
         [Key]
         public int Id { get; set; }
         public string Info { get; set; }
+
+        public virtual List<EnkeltObservasjon> Observasjoner { get; set; }
     }
     public class Observatør
     {
         [Key]
         public int Id { get; set; }
         public string Info { get; set; }
+        public virtual List<EnkeltObservasjon> ObservasjonerRegistrert { get; set; }
+
     }
 
     public class UFOContext : DbContext
