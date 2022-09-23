@@ -1,3 +1,4 @@
-﻿Har satt opp en database, tenkte å endre navn etter oppgaven er utdelt.
+﻿Har ikke lagt inn inputvalidering eller feilhåndtering.
 
-Har ikke lagt inn inputvalidering eller feilhåndtering.
+Når vi skal sette dato/klokkeslett, kan man bruke en sånn her? 
+https://xdsoft.net/jqplugins/datetimepicker/
