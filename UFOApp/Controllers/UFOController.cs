@@ -23,9 +23,9 @@ namespace UFOApp.Controllers
             _log = log;
         }
 
-        public async Task<ActionResult> HentAlle()
+        public async Task<ActionResult> HentAlleObservasjoner()
         {
-            List<Observasjon> Observasjoner = await _db.HentAlle();
+            List<Observasjon> Observasjoner = await _db.HentAlleObservasjoner();
 
             return Ok(Observasjoner);
 

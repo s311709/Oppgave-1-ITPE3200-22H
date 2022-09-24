@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $.get("UFO/HentAlle", function (observasjoner) {
+    $.get("UFO/HentAlleObservasjoner", function (observasjoner) {
         formaterObservasjoner(observasjoner);
     });
 });

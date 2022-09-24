@@ -8,6 +8,6 @@ namespace UFOApp.DAL
 {
     public interface IUFORepository
     {
-        Task <List<Observasjon>> HentAlle();
+        Task <List<Observasjon>> HentAlleObservasjoner();
     }
 }

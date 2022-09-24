@@ -21,7 +21,7 @@ namespace UFOApp.DAL
             _log = log;
         }
 
-        public async Task <List<Observasjon>> HentAlle()
+        public async Task <List<Observasjon>> HentAlleObservasjoner()
         {
             List<EnkeltObservasjon> alleEnkeltObservasjoner = await _db.EnkeltObservasjoner.ToListAsync();
 
