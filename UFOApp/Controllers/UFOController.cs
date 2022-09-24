@@ -30,5 +30,15 @@ namespace UFOApp.Controllers
             return Ok(Observasjoner);
 
         }
+        public async Task<ActionResult> HentEnObservasjon(int id)
+        {
+            Observasjon observasjonen = await _db.HentEnObservasjon(id);
+            if (observasjonen == null)
+            {
+                _log.LogInformation("Fant ikke observasjonen");
+                return NotFound("Fant ikke observasjonen");
+            }
+            return Ok(observasjonen);
+        }
     }
 }

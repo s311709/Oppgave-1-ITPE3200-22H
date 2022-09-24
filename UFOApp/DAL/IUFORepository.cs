@@ -9,5 +9,6 @@ namespace UFOApp.DAL
     public interface IUFORepository
     {
         Task <List<Observasjon>> HentAlleObservasjoner();
+        Task<Observasjon> HentEnObservasjon(int id);
     }
 }
