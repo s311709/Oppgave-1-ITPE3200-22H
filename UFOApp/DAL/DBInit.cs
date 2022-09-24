@@ -25,7 +25,7 @@ namespace UFOApp.DAL
                 var observatør3 = new Observatør { Fornavn = "Erik", Etternavn = "Hansen", Telefon = "67478474", Epost = "ehansen@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
 
                 var ufo1 = new UFO { Kallenavn = "Nyttårs-UFOen", Modell = "Flyvende tallerken", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
-                var ufo2 = new UFO { Kallenavn = "Korn-UFOen i Østfold", Modell = "Ukjent", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
+                var ufo2 = new UFO { Kallenavn = "Korn-UFOen i Østfold", Modell = "Kornåker-UFO", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
 
                 //Forklaring av datetime:
                 //År, måned, dag, time, minutt, sekund
