@@ -89,7 +89,7 @@ namespace UFOApp.DAL
 
             List<UFO> returUFOer = new List<UFO>();
 
-            foreach (var UFO in returUFOer)
+            foreach (var UFO in alleUFOer)
             {
                 var returUFO = new UFO
                 {

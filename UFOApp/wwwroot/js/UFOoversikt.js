@@ -12,11 +12,11 @@ function formaterUFOer(UFOer) {
         "</tr>";
     for (let UFO of UFOer) {
         ut += "<tr>" +
-            "<td>" + UFO.Id + "</td>" +
-            "<td>" + UFO.Kallenavn + "</td>" +
-            "<td>" + UFO.Modell + "</td>" +
-            "<td>" + UFO.GangerObservert + "</td>" +
-            "<td>" + UFO.SistObservert + "</td>" +
+            "<td>" + UFO.id + "</td>" +
+            "<td>" + UFO.kallenavn + "</td>" +
+            "<td>" + UFO.modell + "</td>" +
+            "<td>" + UFO.gangerObservert + "</td>" +
+            "<td>" + UFO.sistObservert + "</td>" +
             "</tr>";
     }
     ut += "</table>";
