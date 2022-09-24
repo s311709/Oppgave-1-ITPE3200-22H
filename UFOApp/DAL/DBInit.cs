@@ -24,8 +24,8 @@ namespace UFOApp.DAL
                 var observatør2 = new Observatør { Fornavn = "Johanne", Etternavn = "Viken", Telefon = "79376924", Epost = "jviken@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
                 var observatør3 = new Observatør { Fornavn = "Erik", Etternavn = "Hansen", Telefon = "67478474", Epost = "ehansen@epost.no", RegistrerteObservasjoner = new List<EnkeltObservasjon>() };
 
-                var ufo1 = new Ufo { Kallenavn = "Nyttårs-UFOen", Modell = "Flyvende tallerken", Observasjoner = new List<EnkeltObservasjon>() };
-                var ufo2 = new Ufo { Kallenavn = "Korn-UFOen i Østfold", Modell = "Ukjent", Observasjoner = new List<EnkeltObservasjon>() };
+                var ufo1 = new Ufo { Kallenavn = "Nyttårs-UFOen", Modell = "Flyvende tallerken", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
+                var ufo2 = new Ufo { Kallenavn = "Korn-UFOen i Østfold", Modell = "Ukjent", Observasjoner = new List<EnkeltObservasjon>(), GangerObservert=0 };
 
                 //Forklaring av datetime:
                 //År, måned, dag, time, minutt, sekund
@@ -76,6 +76,30 @@ namespace UFOApp.DAL
                 observatør2.RegistrerteObservasjoner.Add(observasjon3);
                 observatør3.RegistrerteObservasjoner.Add(observasjon4);
 
+                //Legger til inkrementerings-atributter
+                ufo1.SistObservert = new DateTime(); //setter først dato-tid til lavest mulige verdi for å kunne finne dato sist observert 
+                ufo2.SistObservert = new DateTime(); 
+                
+                foreach (var observasjon in ufo1.Observasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    ufo1.GangerObservert++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > ufo1.SistObservert)
+                    {
+                        ufo1.SistObservert = observasjon.TidspunktObservert;
+                    } 
+                }
+                foreach (var observasjon in ufo2.Observasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    ufo2.GangerObservert++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > ufo2.SistObservert)
+                    {
+                        ufo2.SistObservert = observasjon.TidspunktObservert;
+                    }
+                }
                 context.Add(observasjon1);
                 context.Add(observasjon2);
                 context.Add(observasjon3);

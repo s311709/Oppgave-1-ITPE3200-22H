@@ -26,7 +26,7 @@ namespace UFOApp.DAL
         public string Modell { get; set; }
         public virtual List<EnkeltObservasjon> Observasjoner { get; set; }
         //GangerObservert kan ha en counter i lagre/endre/slett som inkrementerer/dekrementerer for hver gang det legges inn/fjernes en observasjon i Observasjoner-listen
-        public string GangerObservert { get; set; }
+        public int GangerObservert { get; set; }
         //SistObservert: For lagre/endre/slett: Er det mulig å iterere gjennom Observasjoner-listen og velge den største dato-tiden blant observasjonene for å få denne atributten?
         public DateTime SistObservert { get; set; }
     }
