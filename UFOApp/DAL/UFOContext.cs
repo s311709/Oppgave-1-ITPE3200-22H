@@ -15,10 +15,10 @@ namespace UFOApp.DAL
         public string KommuneObservert { get; set; }
         public string BeskrivelseAvObservasjon { get; set; }
         virtual public Observatør Observatør { get; set; }
-        virtual public Ufo ObservertUFO { get; set; }
+        virtual public UFO ObservertUFO { get; set; }
     }
 
-    public class Ufo
+    public class UFO
     {
         [Key]
         public int Id { get; set; }
@@ -58,7 +58,7 @@ namespace UFOApp.DAL
             Database.EnsureCreated();
         }
 
-        public DbSet<Ufo> UFOer { get; set; }
+        public DbSet<UFO> UFOer { get; set; }
         public DbSet<EnkeltObservasjon> EnkeltObservasjoner { get; set; }
         public DbSet<Observatør> Observatører { get; set; }
         

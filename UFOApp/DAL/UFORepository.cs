@@ -81,5 +81,29 @@ namespace UFOApp.DAL
             }
 
         }
+
+
+        public async Task<List<UFO>> HentAlleUFOer()
+        {
+            List<UFO> alleUFOer = await _db.UFOer.ToListAsync();
+
+            List<UFO> returUFOer = new List<UFO>();
+
+            foreach (var UFO in returUFOer)
+            {
+                var returUFO = new UFO
+                {
+                    Id = UFO.Id,
+                    Kallenavn = UFO.Kallenavn,
+                    Modell = UFO.Modell,
+                    SistObservert = UFO.SistObservert,
+                    GangerObservert = UFO.GangerObservert
+                };
+                returUFOer.Add(returUFO);
+            }
+            
+            return returUFOer;
+        }
+
     }
 }
