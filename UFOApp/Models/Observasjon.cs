@@ -8,7 +8,6 @@ namespace UFOApp.Models
     public class Observasjon
     {
         public int Id { get; set; }
-        //Bruke kallenavnet til UFO dersom man skal finne en enkelt UFO i databasen
         public String KallenavnUFO { get; set; }
         public DateTime TidspunktObservert { get; set; }
         public String KommuneObservert { get; set; }

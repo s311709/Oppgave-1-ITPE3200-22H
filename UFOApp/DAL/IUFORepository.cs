@@ -10,5 +10,7 @@ namespace UFOApp.DAL
     {
         Task <List<Observasjon>> HentAlleObservasjoner();
         Task<Observasjon> HentEnObservasjon(int id);
+
     }
+
 }
