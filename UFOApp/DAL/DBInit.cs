@@ -100,6 +100,42 @@ namespace UFOApp.DAL
                         ufo2.SistObservert = observasjon.TidspunktObservert;
                     }
                 }
+
+
+                observatør1.SisteObservasjon = new DateTime();
+                observatør2.SisteObservasjon = new DateTime();
+                observatør3.SisteObservasjon = new DateTime();
+
+                foreach (var observasjon in observatør1.RegistrerteObservasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    observatør1.AntallRegistrerteObservasjoner++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > observatør1.SisteObservasjon)
+                    {
+                        observatør1.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
+                foreach (var observasjon in observatør2.RegistrerteObservasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    observatør2.AntallRegistrerteObservasjoner++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > observatør2.SisteObservasjon)
+                    {
+                        observatør2.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
+                foreach (var observasjon in observatør3.RegistrerteObservasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    observatør3.AntallRegistrerteObservasjoner++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > observatør3.SisteObservasjon)
+                    {
+                        observatør3.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
                 context.Add(observasjon1);
                 context.Add(observasjon2);
                 context.Add(observasjon3);
