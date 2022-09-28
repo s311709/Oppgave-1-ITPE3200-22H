@@ -44,6 +44,7 @@ namespace UFOApp.DAL
             var nyObservatørrad = new Observatør();
             nyObservatørrad.Fornavn = innObservasjon.FornavnObservatør;
             nyObservatørrad.Etternavn = innObservasjon.EtternavnObservatør;
+                //OBS telefonnummer kommer inn som null, se på formattering
             nyObservatørrad.Telefon = innObservasjon.TelefonObservatør;
             nyObservatørrad.Epost = innObservasjon.EpostObservatør;
             _db.Observatører.Add(nyObservatørrad);
@@ -53,21 +54,18 @@ namespace UFOApp.DAL
              var nyObservasjonsrad = new EnkeltObservasjon();
                 // må lage et input for nedtrekkslisten her "type UFO"
                 //  nyObservasjonsrad.Modell = innObservasjon.Modell;
+
+                //OBS tidspunkt blir ikke lagret rett, nullstilles en plass mellom innObservasjon og visning på nettsiden
             nyObservasjonsrad.TidspunktObservert = innObservasjon.TidspunktObservert;
             nyObservasjonsrad.KommuneObservert = innObservasjon.KommuneObservert;
             nyObservasjonsrad.BeskrivelseAvObservasjon = innObservasjon.BeskrivelseAvObservasjon;
-                //observatør
-                /*observert Ufo: et ufo-objekt man velger i nedtrekkslisten
-                hva gjør man hvis det er en ny ufo? må da fylle inn en ny ufo, lag sjekk
-                som i postnummerliste
-                 */
 
-                // sjekk om ufo er allerede observert
-                //ved å se om det er merket på nedtrekkslisten
-                //ellers lag nytt objekt
-                var sjekkUfoModell = await _db.UFOer.FindAsync(innObservasjon.KallenavnUFO);
 
-                if (sjekkUfoModell == null)
+                //pakket inn i en ekstra try/catch for debugging, prøver var under også hopper til catch, tror UFOer returnerer null og nullobjektet trigger catch
+                try {
+                    var innKallenavn = innObservasjon.KallenavnUFO;
+                    var sjekkUfoModell = await _db.UFOer.FindAsync(innKallenavn);
+                    if (sjekkUfoModell == null)
                 {
                     var nyUFO = new UFO();
                     nyUFO.Modell = innObservasjon.Modell;
@@ -84,6 +82,11 @@ namespace UFOApp.DAL
                     nyObservasjonsrad.ObservertUFO = sjekkUfoModell;
                 }
                 _db.EnkeltObservasjoner.Add(nyObservasjonsrad);
+                }
+                catch
+                {
+                    return false;
+                }
 
                 /*
                 //trenger ikke den over, legg inn en "ingen av de over" for å trigge nytt objekt
@@ -200,7 +203,8 @@ namespace UFOApp.DAL
             {
                 var returUFO = new UFO
                 {
-                    Id = UFO.Id,
+                    //RUTH id er også fjernet her, auto-increment i UFOContext (se notater der)
+                    //Id = UFO.Id,
                     Kallenavn = UFO.Kallenavn,
                     Modell = UFO.Modell,
                     SistObservert = UFO.SistObservert,

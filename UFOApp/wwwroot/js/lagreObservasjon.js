@@ -41,10 +41,10 @@ function lagreObservasjon() {
         EpostObservatør: $("#epost").val()
 
     }
-    const url = "Observasjon/Lagre";
+    const url = "UFO/LagreObservasjon";
     $.post(url, observasjon, function (OK) {
         if (OK) {
-            window.location.href = 'index.html';
+            window.location.href = 'lagreObservasjon.html';
         }
         else {
             $("#feil").html("Feil i db ved lagring - prøv igjen senere");

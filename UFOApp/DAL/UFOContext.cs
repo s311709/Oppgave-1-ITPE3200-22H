@@ -21,7 +21,11 @@ namespace UFOApp.DAL
     public class UFO
     {
         [Key]
-        public int Id { get; set; }
+        /*RUTH: fant problemet med UFO! Kallenavn må være primary key for at man skal kunne søke i objektet
+        *notater fra forelesning
+        *        //Key, using System,ComponentModel.DataAnnotations; inkrementerer for å gi unik ID
+        */
+        //   public int Id { get; set; } // er fjernet fra her og fra repo (søk på RUTH)
         public String Kallenavn { get; set; }
         public string Modell { get; set; }
         public virtual List<EnkeltObservasjon> Observasjoner { get; set; }
