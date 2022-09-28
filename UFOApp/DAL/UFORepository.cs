@@ -138,10 +138,12 @@ namespace UFOApp.DAL
                 List<EnkeltObservasjon> alleEnkeltObservasjoner = await _db.EnkeltObservasjoner.ToListAsync();
 
                 List<Observasjon> alleObservasjoner = new List<Observasjon>();
-
+                //note to self: sist observert er ikke koda, og observatør er null inni alleEnkeltObservasjoner under. Den som skaper exception? mangler jeg noe
                 foreach (var enkeltObservasjon in alleEnkeltObservasjoner)
                 {
                     //Har valgt å ikke ta med alle atributtene, kan dette være i en egen siden hvor man får mer info om hver observasjon?
+                    //RUTH får tidvis en nullpointersxception her når jeg lagrer et nytt objekt og den skal gå tilbake til index.html for å vise det
+                
                     var enObservasjon = new Observasjon
                     {
                         Id = enkeltObservasjon.Id,

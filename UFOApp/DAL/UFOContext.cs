@@ -9,6 +9,7 @@ namespace UFOApp.DAL
 {
     public class EnkeltObservasjon
     {
+        //RUTH Kan det gjelde denne også, at ID er unødveldig når man har Key og når de er tilknyttet Observasjon som hovedklasse (som postnummer og kunde)?
         [Key]
         public int Id { get; set; }
         public DateTime TidspunktObservert { get; set; } //Dato+klokkeslett
