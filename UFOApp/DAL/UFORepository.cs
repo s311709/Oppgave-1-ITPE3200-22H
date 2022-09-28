@@ -25,6 +25,21 @@ namespace UFOApp.DAL
         {
             try {
 
+                //Først må du sjekke om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
+                // sånn som du har gjort. Det må bare pakkes inn i en if-loop.
+
+                //Deretter sjekker du om UFO finnes, sånn som du har gjort, før du lager ny UFO hvis den ikke finnes
+
+                //Deretter lagrer du en ny EnkeltObservasjon med UFOen og Observatøren i attributter inni EnkeltObservasjon
+
+                //Så legger du EnkeltObservasjon inn i listene til UFO og Observatør
+
+                //Til slutt oppdaterer du UFO og Observatør sine atributter antallObservasjoner og sistObservert
+                //Har gjort dette i DBInit, basically så skal man inkrementere antallObservasjoner med én for UFO og Observatør
+                //og deretter iterere gjennom Observasjoner-listen for å finne mest nylige dato for å få sistObservert
+
+
+
             //  skal vi lagre separate rader for observatører eller skal alt lagres i obervasjon?
             var nyObservatørrad = new Observatør();
             nyObservatørrad.Fornavn = innObservasjon.FornavnObservatør;
