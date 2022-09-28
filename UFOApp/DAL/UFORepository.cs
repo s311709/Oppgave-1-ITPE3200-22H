@@ -31,7 +31,6 @@ namespace UFOApp.DAL
 
                 foreach (var enkeltObservasjon in alleEnkeltObservasjoner)
                 {
-                    //Har valgt å ikke ta med alle atributtene, kan dette være i en egen siden hvor man får mer info om hver observasjon?
                     var enObservasjon = new Observasjon
                     {
                         Id = enkeltObservasjon.Id,
