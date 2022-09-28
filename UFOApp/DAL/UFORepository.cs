@@ -68,6 +68,7 @@ namespace UFOApp.DAL
                     // hvis allerede sett, lagre UFOen som allerede er i DB
                     nyObservasjonsrad.ObservertUFO = sjekkUfoModell;
                 }
+                _db.EnkeltObservasjoner.Add(nyObservasjonsrad);
 
                 /*
                 //trenger ikke den over, legg inn en "ingen av de over" for å trigge nytt objekt
@@ -90,7 +91,7 @@ namespace UFOApp.DAL
                 }
                 */
 
-                
+
                 //kallenavn
                 //modell
 
@@ -100,7 +101,6 @@ namespace UFOApp.DAL
                 // db har enkeltobservasjon og observatør ikke obervasjon
 
                 //enkeltobservasjon vs observasjon?
-                _db.EnkeltObservasjoner.Add(nyObservasjonsrad);
                 await _db.SaveChangesAsync();
                            
 

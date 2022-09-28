@@ -13,8 +13,13 @@
     }
 });
 
+$("#lagreKnapp").on("click", function () {
+    console.log("inni lagret funksjon")
+    alert("inni knapp")
+});
 
 function lagreObservasjon() {
+    console.log("button is pressed")
     const observasjon = {
 
         // observasjon:

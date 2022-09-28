@@ -37,38 +37,38 @@
 
 
 <!-- skjema -->
-<div class="container">
-    <form class="card d-flex  col-lg-8 col-md-12">
-        <div class="header mb-5">
-            <h1>Innmelding av observasjon</h1>
-        </div>
-
-        <div class="row">
-            <div class="col-4">
-                <h2> Informasjon om observatør </h2>
+    <div class="container">
+        <form class="card d-flex  col-lg-8 col-md-12">
+            <div class="header mb-5">
+                <h1>Innmelding av observasjon</h1>
             </div>
 
-            <div class="col-8">
-                <div class="form-floating mb-3">
-                    <input type="text" placeholder="Nils" class="form-control" id="fornavn">
-                    <label for="fornavn">Fornavn</label>
+            <div class="row">
+                <div class="col-4">
+                    <h2> Informasjon om observatør </h2>
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="text" placeholder="Hansson" class="form-control" id="etternavn">
-                    <label for="etternavn">Etternavn</label>
+
+                <div class="col-8">
+                    <div class="form-floating mb-3">
+                        <input type="text" placeholder="Nils" class="form-control" id="fornavn">
+                        <label for="fornavn">Fornavn</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" placeholder="Hansson" class="form-control" id="etternavn">
+                        <label for="etternavn">Etternavn</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" placeholder="80080800" class="form-control" id="telefonnummer">
+                        <label for="telefonnummer">Telefonnummer</label>
+                    </div>
+                    <!-- bootstrap har validering når man definerer type som under (email)-->
+                    <div class="form-floating mb-3">
+                        <input type="email" id="epost" placeholder="nils.hansson@gmail.com" class="form-control">
+                        <label for="epost">Epost</label>
+                    </div>
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="text" placeholder="80080800" class="form-control" id="telefonnummer">
-                    <label for="telefonnummer">Telefonnummer</label>
-                </div>
-                <!-- bootstrap har validering når man definerer type som under (email)-->
-                <div class="form-floating mb-3">
-                    <input type="email" id="epost" placeholder="nils.hansson@gmail.com" class="form-control">
-                    <label for="epost">Epost</label>
-                </div>
-            </div>
-        </div> <!-- observatørRow-->
-        <!--      <div class="form-group">
+            </div> <!-- observatørRow-->
+            <!--      <div class="form-group">
             <label for="fname">type UFO:</label>
             <input type="text" id="fname" name="fname">
         </div>
@@ -76,29 +76,29 @@
     må finne ut av kategoriener og kanskje gjøre at man kan velge flere?
           obs mangler pil -->
 
-        <hr class="my-2" />
+            <hr class="my-2" />
 
 
-        <div class="row">
-            <div class="col-4 text-left align-content-start">
-                <h2> Om UFOen  </h2>
-            </div>
-
-
-            <div class="col-8">
-                <div class="form-group mb-3">
-                    <label for="fname">Hva så du?</label>
-                    <select class="form-control" id="inputform">
-                        <!-- her kommer alle registrerte UFOer i databasen!-->
-                        <!-- kanskje legg inn en placeholder her så man ser det er ei liste man kan trykke på?-->
-                        <option hidden>velg en UFO</option>
-                        <option>ikke på listen</option>
-                        <!-- hvis UFO er ny entry vil den lagres som ny
-                    men hvis den ikke er det burde data autofilles i de feltene?-->
-                    </select>
+            <div class="row">
+                <div class="col-4 text-left align-content-start">
+                    <h2> Om UFOen  </h2>
                 </div>
 
-                <!-- test med checkboxes istedenfor nedtrekk
+
+                <div class="col-8">
+                    <div class="form-group mb-3">
+                        <label for="fname">Hva så du?</label>
+                        <select class="form-control" id="inputform">
+                            <!-- her kommer alle registrerte UFOer i databasen!-->
+                            <!-- kanskje legg inn en placeholder her så man ser det er ei liste man kan trykke på?-->
+                            <option hidden>velg en UFO</option>
+                            <option>ikke på listen</option>
+                            <!-- hvis UFO er ny entry vil den lagres som ny
+                    men hvis den ikke er det burde data autofilles i de feltene?-->
+                        </select>
+                    </div>
+
+                    <!-- test med checkboxes istedenfor nedtrekk
                 tanken er å kunne tagge innsendte meldinger med kategorier
             <div class="col-8">
                 <div> Hva så du?</div>
@@ -124,63 +124,65 @@
                 </div>
             </div>
                 -->
-                <!-- tenkte å bruke denne til å gjemme hendelseswnavn og modell om man velger
+                    <!-- tenkte å bruke denne til å gjemme hendelseswnavn og modell om man velger
                 en ufo fra lista (vise de når man velger "ikke på lista")
                 <div id="nyUfo">HALLO</div>
             -->
-                <!-- kallenavn er UFOnavn-->
-                <div class="form-floating mb-4">
-                    <input type="text" id="hendelse" placeholder="lyset over Tromsdalstinden" class="form-control">
-                    <label for="hendelse">Hendelsesnavn</label>
-                    <div> feks "lyset over Tromsdalstinden"</div>
-                </div>
+                    <!-- kallenavn er UFOnavn-->
+                    <div class="form-floating mb-4">
+                        <input type="text" id="hendelse" placeholder="lyset over Tromsdalstinden" class="form-control">
+                        <label for="hendelse">Hendelsesnavn</label>
+                        <div> feks "lyset over Tromsdalstinden"</div>
+                    </div>
 
-                <!-- kan endre denne delen så man bare kan fylle inn modell om man velger
+                    <!-- kan endre denne delen så man bare kan fylle inn modell om man velger
             at det er noe nytt, eller man kan gjemme denne om man velger noe på listen
             eller man kan bare vise den om man velger "noe nytt" på listen
             eller man kan autofylle modell når man velger UFO fra listen
             modell OG hendelsesnavn burde egt bare vises om det er noe nytt-->
-                <div class="form-floating mb-4">
-                    <input type="text" id="modell" name="modell" placeholder="Modell" class="form-control">
-                    <label for="modell">Modell</label>
+                    <div class="form-floating mb-4">
+                        <input type="text" id="modell" placeholder="Modell" class="form-control">
+                        <label for="modell">Modell</label>
+                    </div>
+
                 </div>
+            </div> <!-- om UFOen row-->
 
-            </div>
-        </div> <!-- om UFOen row-->
-
-        <div class="row">
-            <div class="col-6 mb-3">
-                <!--                <div class="form-floating mb-3">
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <!--                <div class="form-floating mb-3">
                                 <input type="text" id="tidspunkt" placeholder="tidspunkt" class="form-control">
                                 <label for="tidspunkt">Tidspunkt</label>
                             </div>
             -->
-                <!-- date and time input-->
-                <label for="date" class="col-form-label">Tidspunkt</label>
-                <div class="input-group date form-floating" id="datepicker">
-                    <input type="datetime-local" class="form-control" id="date" placeholder="date" />
-                    <span class="input-group-append">
-                    </span>
+                    <!-- date and time input-->
+                    <label for="date" class="col-form-label">Tidspunkt</label>
+                    <div class="input-group date form-floating" id="datepicker">
+                        <input type="datetime-local" class="form-control" id="dato" placeholder="date" />
+                        <span class="input-group-append">
+                        </span>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <div class="col-12 mb-3">
-                <div class="form-floating mb-3">
-                    <input type="text" id="kommune" placeholder="kommune" class="form-control">
-                    <label for="kommune">Kommune</label>
+                <div class="col-12 mb-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" id="kommune" placeholder="kommune" class="form-control">
+                        <label for="kommune">Kommune</label>
+                    </div>
                 </div>
-            </div>
-        </div> <!-- row-->
+            </div> <!-- row-->
 
-        <div class="form-group mb-3 col-12">
-            <label for="beskrivelse">Beskrivelse av observasjonen</label>
-            <textarea id="beskrivelse" rows="3" class="form-control"></textarea>
-        </div>
-        <div id="feil"></div>
-        <button onclick="lagreObservasjon()">Send inn</button>
-    </form>
-</div>
+            <div class="form-group mb-3 col-12">
+                <label for="beskrivelse">Beskrivelse av observasjonen</label>
+                <textarea id="beskrivelse" rows="3" class="form-control"></textarea>
+            </div>
+            <div id="feil"></div>
+            <!--<button id="lagreKnapp" type="button" onclick="lagreObservasjon()">Send inn</button>
+        -->
+        </form>
+        <button id="lagreKnapp" type="button" onclick="lagreObservasjon()">Send inn</button>
+    </div>
 
 </body>
 </html>
