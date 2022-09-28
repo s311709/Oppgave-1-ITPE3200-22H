@@ -28,7 +28,7 @@ namespace UFOApp.DAL
                 //Først må du sjekke om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
                 // sånn som du har gjort. Det må bare pakkes inn i en if-loop.
 
-                //Deretter sjekker du om UFO finnes, sånn som du har gjort, før du lager ny UFO
+                //Deretter sjekker du om UFO finnes, sånn som du har gjort, før du lager ny UFO hvis den ikke finnes
 
                 //Deretter lagrer du en ny EnkeltObservasjon med UFOen og Observatøren i attributter inni EnkeltObservasjon
 
