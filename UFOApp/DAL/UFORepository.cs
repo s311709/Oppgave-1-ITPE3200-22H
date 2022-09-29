@@ -65,9 +65,9 @@ namespace UFOApp.DAL
                     _db.UFOer.Add(nyUFOrad);
                     await _db.SaveChangesAsync();
                     funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == innObservasjon.KallenavnUFO);
-
+                    
                 }
-
+                
                 //Deretter lages en ny EnkeltObservasjon med UFOen og Observatøren i attributter inni EnkeltObservasjon
 
                 EnkeltObservasjon nyEnkeltObservasjonRad = new EnkeltObservasjon
@@ -84,15 +84,17 @@ namespace UFOApp.DAL
 
                 //Så legges EnkeltObservasjon inn i listene til UFO og Observatør
 
-                funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
-                funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
+                // funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
+                // funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
 
                 //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
 
+                funnetObservatør.AntallRegistrerteObservasjoner++;
+                funnetUFO.GangerObservert++;
+
                 foreach (EnkeltObservasjon observasjon in funnetUFO.Observasjoner)
                 {
-                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
-                    funnetUFO.GangerObservert++;
+                    
                     //setter SistObservert-atributten
                     if (observasjon.TidspunktObservert > funnetUFO.SistObservert)
                     {
@@ -102,15 +104,14 @@ namespace UFOApp.DAL
 
                 foreach (EnkeltObservasjon observasjon in funnetObservatør.RegistrerteObservasjoner)
                 {
-                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
-                    funnetObservatør.AntallRegistrerteObservasjoner++;
+                   
                     //setter SistObservert-atributten
                     if (observasjon.TidspunktObservert > funnetObservatør.SisteObservasjon)
                     {
                         funnetObservatør.SisteObservasjon = observasjon.TidspunktObservert;
                     }
                 }
-
+               
                 await _db.SaveChangesAsync();
 
                 return true;
