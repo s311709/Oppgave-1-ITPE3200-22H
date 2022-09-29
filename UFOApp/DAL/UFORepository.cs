@@ -89,7 +89,7 @@ namespace UFOApp.DAL
 
                 //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
 
-                foreach (var observasjon in funnetUFO.Observasjoner)
+                foreach (EnkeltObservasjon observasjon in funnetUFO.Observasjoner)
                 {
                     //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
                     funnetUFO.GangerObservert++;
@@ -100,7 +100,7 @@ namespace UFOApp.DAL
                     }
                 }
 
-                foreach (var observasjon in funnetObservatør.RegistrerteObservasjoner)
+                foreach (EnkeltObservasjon observasjon in funnetObservatør.RegistrerteObservasjoner)
                 {
                     //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
                     funnetObservatør.AntallRegistrerteObservasjoner++;
