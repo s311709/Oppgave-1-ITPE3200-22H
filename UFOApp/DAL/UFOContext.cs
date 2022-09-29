@@ -9,7 +9,6 @@ namespace UFOApp.DAL
 {
     public class EnkeltObservasjon
     {
-        //RUTH Kan det gjelde denne også, at ID er unødveldig når man har Key og når de er tilknyttet Observasjon som hovedklasse (som postnummer og kunde)?
         [Key]
         public int Id { get; set; }
         public DateTime TidspunktObservert { get; set; } //Dato+klokkeslett
@@ -22,11 +21,7 @@ namespace UFOApp.DAL
     public class UFO
     {
         [Key]
-        /*RUTH: fant problemet med UFO! Kallenavn må være primary key for at man skal kunne søke i objektet
-        *notater fra forelesning
-        *        //Key, using System,ComponentModel.DataAnnotations; inkrementerer for å gi unik ID
-        */
-        //   public int Id { get; set; } // er fjernet fra her og fra repo (søk på RUTH)
+        public int Id { get; set; }
         public String Kallenavn { get; set; }
         public string Modell { get; set; }
         public virtual List<EnkeltObservasjon> Observasjoner { get; set; }

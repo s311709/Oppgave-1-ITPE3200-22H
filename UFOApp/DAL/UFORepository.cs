@@ -23,106 +23,97 @@ namespace UFOApp.DAL
 
         public async Task<bool> Lagre(Observasjon innObservasjon)
         {
-            try {
+            try
+            {
 
-                //Først må du sjekke om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
-                // sånn som du har gjort. Det må bare pakkes inn i en if-loop.
+                //Først sjekkes det om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
 
-                //Deretter sjekker du om UFO finnes, sånn som du har gjort, før du lager ny UFO hvis den ikke finnes
+                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør /*&& o.Fornavn = innObservasjon.FornavnObservatør*/);
 
-                //Deretter lagrer du en ny EnkeltObservasjon med UFOen og Observatøren i attributter inni EnkeltObservasjon
-
-                //Så legger du EnkeltObservasjon inn i listene til UFO og Observatør
-
-                //Til slutt oppdaterer du UFO og Observatør sine atributter antallObservasjoner og sistObservert
-                //Har gjort dette i DBInit, basically så skal man inkrementere antallObservasjoner med én for UFO og Observatør
-                //og deretter iterere gjennom Observasjoner-listen for å finne mest nylige dato for å få sistObservert
-
-
-
-            //  skal vi lagre separate rader for observatører eller skal alt lagres i obervasjon?
-            var nyObservatørrad = new Observatør();
-            nyObservatørrad.Fornavn = innObservasjon.FornavnObservatør;
-            nyObservatørrad.Etternavn = innObservasjon.EtternavnObservatør;
-                //OBS telefonnummer kommer inn som null, se på formattering
-            nyObservatørrad.Telefon = innObservasjon.TelefonObservatør;
-            nyObservatørrad.Epost = innObservasjon.EpostObservatør;
-            _db.Observatører.Add(nyObservatørrad);
-            await _db.SaveChangesAsync();
-
-
-             var nyObservasjonsrad = new EnkeltObservasjon();
-                // må lage et input for nedtrekkslisten her "type UFO"
-                //  nyObservasjonsrad.Modell = innObservasjon.Modell;
-
-                //OBS tidspunkt blir ikke lagret rett, nullstilles en plass mellom innObservasjon og visning på nettsiden
-            nyObservasjonsrad.TidspunktObservert = innObservasjon.TidspunktObservert;
-            nyObservasjonsrad.KommuneObservert = innObservasjon.KommuneObservert;
-            nyObservasjonsrad.BeskrivelseAvObservasjon = innObservasjon.BeskrivelseAvObservasjon;
-
-
-                //pakket inn i en ekstra try/catch for debugging, prøver var under også hopper til catch, tror UFOer returnerer null og nullobjektet trigger catch
-                try {
-                    var innKallenavn = innObservasjon.KallenavnUFO;
-                    var sjekkUfoModell = await _db.UFOer.FindAsync(innKallenavn);
-                    if (sjekkUfoModell == null)
+                if (funnetObservatør == null)
                 {
-                    var nyUFO = new UFO();
-                    nyUFO.Modell = innObservasjon.Modell;
-                    //kallenavn burde bare skje med nytt objekt, flytt
-                    nyUFO.Kallenavn = innObservasjon.KallenavnUFO;
-                    //legg den nye UFOen til i enkeltobservasjon
-                    nyObservasjonsrad.ObservertUFO = nyUFO;
+                    var nyObservatørrad = new Observatør
+                    {
+                        Fornavn = innObservasjon.FornavnObservatør,
+                        Etternavn = innObservasjon.EtternavnObservatør,
+                        Telefon = innObservasjon.TelefonObservatør,
+                        Epost = innObservasjon.EpostObservatør,
+                        RegistrerteObservasjoner = new List<EnkeltObservasjon>(),
+                        AntallRegistrerteObservasjoner = 0,
+                        SisteObservasjon = new DateTime()
+                    };
+                    _db.Observatører.Add(nyObservatørrad);
+                    await _db.SaveChangesAsync();
+                    funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør /*&& o.Fornavn = innObservasjon.FornavnObservatør*/);
+
                 }
-                else
+
+                //Deretter sjekkes det om UFO finnes før det lages en ny UFO hvis den ikke finnes
+
+                UFO funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == innObservasjon.KallenavnUFO);
+
+                if (funnetUFO == null)
                 {
-                    //legg observatøren til i observasjonsobjektet
-                    nyObservasjonsrad.Observatør = nyObservatørrad;
-                    // hvis allerede sett, lagre UFOen som allerede er i DB
-                    nyObservasjonsrad.ObservertUFO = sjekkUfoModell;
+                    var nyUFOrad = new UFO
+                    {
+                        Modell = innObservasjon.Modell,
+                        Kallenavn = innObservasjon.KallenavnUFO,
+                        Observasjoner = new List<EnkeltObservasjon>(),
+                        GangerObservert = 0,
+                        SistObservert = new DateTime()
+                    };
+                    _db.UFOer.Add(nyUFOrad);
+                    await _db.SaveChangesAsync();
+                    funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == innObservasjon.KallenavnUFO);
+
                 }
-                _db.EnkeltObservasjoner.Add(nyObservasjonsrad);
-                }
-                catch
+
+                //Deretter lages en ny EnkeltObservasjon med UFOen og Observatøren i attributter inni EnkeltObservasjon
+
+                EnkeltObservasjon nyEnkeltObservasjonRad = new EnkeltObservasjon
                 {
-                    return false;
-                }
+                    TidspunktObservert = innObservasjon.TidspunktObservert,
+                    KommuneObservert = innObservasjon.KommuneObservert,
+                    BeskrivelseAvObservasjon = innObservasjon.BeskrivelseAvObservasjon,
+                    ObservertUFO = funnetUFO,
+                    Observatør = funnetObservatør
+                };
 
-                /*
-                //trenger ikke den over, legg inn en "ingen av de over" for å trigge nytt objekt
-                if (innObservasjon.Modell == "ikke på listen")
-                {
-                    var nyUFO = new UFO();
-                    nyUFO.Modell = innObservasjon.Modell;
-                    nyUFO.Kallenavn = innObservasjon.KallenavnUFO;
-                    //lagrer et nytt ufo-objekt
-
-                 //   nyObservasjonsrad skal dette inn i observasjon somehow?
-                 //hvordan legge til Observasjoner = new List<EnkeltObservasjon>(), GangerObservert = 0 };
-                }
-                else
-                {
-                    //øk count på sighting på UFOen med 1
-
-                    //lagre ufoen som den sett i enkeltobservasjonsobjektet
-                    nyObservasjonsrad.ObservertUFO = innObservasjon.KallenavnUFO;
-                }
-                */
-
-
-                //kallenavn
-                //modell
-
-                // kallenavn og modell er i observasjon ikke enkeltobservasjon, må kodes inn
-
-
-                // db har enkeltobservasjon og observatør ikke obervasjon
-
-                //enkeltobservasjon vs observasjon?
+                _db.EnkeltObservasjoner.Add(nyEnkeltObservasjonRad);
                 await _db.SaveChangesAsync();
-                           
 
-            return true;
+                //Så legges EnkeltObservasjon inn i listene til UFO og Observatør
+
+                funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
+                funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
+
+                //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
+
+                foreach (var observasjon in funnetUFO.Observasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    funnetUFO.GangerObservert++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > funnetUFO.SistObservert)
+                    {
+                        funnetUFO.SistObservert = observasjon.TidspunktObservert;
+                    }
+                }
+
+                foreach (var observasjon in funnetObservatør.RegistrerteObservasjoner)
+                {
+                    //setter GangerObservert-atributten vha inkrementering gjennom listen over observasjoner
+                    funnetObservatør.AntallRegistrerteObservasjoner++;
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > funnetObservatør.SisteObservasjon)
+                    {
+                        funnetObservatør.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
+
+                await _db.SaveChangesAsync();
+
+                return true;
 
             }
             catch
@@ -143,7 +134,7 @@ namespace UFOApp.DAL
                 {
                     //Har valgt å ikke ta med alle atributtene, kan dette være i en egen siden hvor man får mer info om hver observasjon?
                     //RUTH får tidvis en nullpointersxception her når jeg lagrer et nytt objekt og den skal gå tilbake til index.html for å vise det
-                
+
                     var enObservasjon = new Observasjon
                     {
                         Id = enkeltObservasjon.Id,
@@ -205,8 +196,7 @@ namespace UFOApp.DAL
             {
                 var returUFO = new UFO
                 {
-                    //RUTH id er også fjernet her, auto-increment i UFOContext (se notater der)
-                    //Id = UFO.Id,
+                    Id = UFO.Id,
                     Kallenavn = UFO.Kallenavn,
                     Modell = UFO.Modell,
                     SistObservert = UFO.SistObservert,
@@ -214,7 +204,7 @@ namespace UFOApp.DAL
                 };
                 returUFOer.Add(returUFO);
             }
-            
+
             return returUFOer;
         }
 
