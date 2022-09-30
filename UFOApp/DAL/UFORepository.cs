@@ -210,33 +210,6 @@ namespace UFOApp.DAL
             return returUFOer;
         }
 
-        public async Task<UFO> HentEnUFO(string kallenavn)
-        {
-                     
-            //Får ikke til å ta inn noe fra klient
-            kallenavn = "Nyttårs-UFOen";
-            try
-            {
-                UFO funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == kallenavn);
-
-                var returUFO = new UFO
-                {
-                    Id = funnetUFO.Id,
-                    Kallenavn = funnetUFO.Kallenavn,
-                    Modell = funnetUFO.Modell,
-                    SistObservert = funnetUFO.SistObservert,
-                    GangerObservert = funnetUFO.GangerObservert
-                };
-
-                return returUFO;
-            }
-            catch (Exception e)
-            {
-                _log.LogInformation(e.Message);
-                return null;
-            }
-
-        }
 
     }
 }

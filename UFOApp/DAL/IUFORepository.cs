@@ -13,7 +13,6 @@ namespace UFOApp.DAL
         Task <List<Observasjon>> HentAlleObservasjoner();
         Task<Observasjon> HentEnObservasjon(int id);
         Task<List<UFO>> HentAlleUFOer();
-        Task<UFO> HentEnUFO(string kallenavn);
 
 
     }

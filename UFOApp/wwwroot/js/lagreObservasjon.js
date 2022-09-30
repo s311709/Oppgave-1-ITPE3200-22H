@@ -13,12 +13,6 @@
     }
 });
 
-function finnModellnavn(UFOnavn) {
-    $.get("UFO/HentEnUFO", UFOnavn, function (UFO) {
-        $("#modell").val(UFO.modell);
-        
-    });
-}
 
 function lagreObservasjon() {
     const observasjon = {
@@ -55,7 +49,6 @@ $(function () {
         var UFOnavn = $(this).children("option:selected").text();
 
         if (UFOnavn != "ikke på listen") {
-            finnModellnavn(UFOnavn);
             $("#modell").prop("disabled", true);
             $("#UFOnavn").prop("disabled", true);
             $("#UFOnavn").val(UFOnavn)
