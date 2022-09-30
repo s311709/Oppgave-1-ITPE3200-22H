@@ -13,27 +13,15 @@
     }
 });
 
-$("#lagreKnapp").on("click", function () {
-    console.log("inni lagret funksjon")
-    alert("inni knapp")
-});
-
 function lagreObservasjon() {
-    console.log("button is pressed")
     const observasjon = {
-
-        // observasjon:
-        /* for å lagre dato+tid i en input er det bare å bruke noe som likner dette
- *  <input type='datetime-local' id='dato'>
- *  Trenger ikke parse eller noe, bare å sende rett til db */
-        //UFO = kallenavn
-        //        UFO: $("#inputform").val(),
-        //hendelse == også kallenavn
+        //UFOen
+        //kallenavnUFO vil være enten selv-innskrevet eller navnet på en allerede sett UFO
         KallenavnUFO: $("#hendelse").val(),
+        Modell: $("#modell").val(),
         TidspunktObservert: $("#dato").val(),
         KommuneObservert: $("#kommune").val(),
         BeskrivelseAvObservasjon: $("#beskrivelse").val(),
-        Modell: $("#modell").val(),
         // observatør:
         FornavnObservatør: $("#fornavn").val(),
         EtternavnObservatør: $("#etternavn").val(),
@@ -44,7 +32,7 @@ function lagreObservasjon() {
     const url = "UFO/LagreObservasjon";
     $.post(url, observasjon, function (OK) {
         if (OK) {
-            window.location.href = 'lagreObservasjon.html';
+            window.location.href = 'index.html';
         }
         else {
             $("#feil").html("Feil i db ved lagring - prøv igjen senere");
@@ -52,12 +40,21 @@ function lagreObservasjon() {
     });
 }
 
+//  disabler modell/navn på UFO om man velger en allerede oppdaget UFO i dropdown
+$(function () {
+    $("#inputform").change(function () {
 
-/*
-function nyUFO() {
-    if ($("#inputform").value = "ikke på listen") {
-        $("#nyUfo").show()
-    }
-}
-*/
-//hvis inputform-elementet er "noe nytt", lagre modell-verdien i det nye objektet
+        // henter ut text fra selected option
+        var modellNavn = $(this).children("option:selected").text();
+
+        if (modellNavn != "ikke på listen") {
+            $("#modell").prop("disabled", true);
+            $("#hendelse").prop("disabled", true);
+            $("#hendelse").val(modellNavn)
+        }
+        else {
+            $("#modell").prop("disabled", false);
+            $("#hendelse").prop("disabled", false);
+        }
+    });
+});
