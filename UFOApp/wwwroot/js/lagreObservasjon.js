@@ -13,11 +13,18 @@
     }
 });
 
+function finnModellnavn(UFOnavn) {
+    $.get("UFO/HentEnUFO", UFOnavn, function (UFO) {
+        $("#modell").val(UFO.modell);
+        
+    });
+}
+
 function lagreObservasjon() {
     const observasjon = {
         //UFOen
         //kallenavnUFO vil være enten selv-innskrevet eller navnet på en allerede sett UFO
-        KallenavnUFO: $("#hendelse").val(),
+        KallenavnUFO: $("#UFOnavn").val(),
         Modell: $("#modell").val(),
         TidspunktObservert: $("#dato").val(),
         KommuneObservert: $("#kommune").val(),
@@ -45,16 +52,20 @@ $(function () {
     $("#inputform").change(function () {
 
         // henter ut text fra selected option
-        var modellNavn = $(this).children("option:selected").text();
+        var UFOnavn = $(this).children("option:selected").text();
 
-        if (modellNavn != "ikke på listen") {
+        if (UFOnavn != "ikke på listen") {
+            finnModellnavn(UFOnavn);
             $("#modell").prop("disabled", true);
-            $("#hendelse").prop("disabled", true);
-            $("#hendelse").val(modellNavn)
+            $("#UFOnavn").prop("disabled", true);
+            $("#UFOnavn").val(UFOnavn)
         }
         else {
             $("#modell").prop("disabled", false);
-            $("#hendelse").prop("disabled", false);
+            $("#UFOnavn").prop("disabled", false);
+            $("#UFOnavn").val("")
+            $("#modell").val("")
+            
         }
     });
 });

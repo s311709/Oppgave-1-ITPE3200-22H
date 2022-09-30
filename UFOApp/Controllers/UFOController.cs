@@ -46,7 +46,18 @@ namespace UFOApp.Controllers
             return Ok(observasjonen);
         }
 
-        public async Task<ActionResult> HentAlleUFOer()
+        public async Task<ActionResult> HentEnUFO(string kallenavn)
+        {
+            UFO UFO = await _db.HentEnUFO(kallenavn);
+            if (UFO == null)
+            {
+                _log.LogInformation("Fant ikke UFOen");
+                return NotFound("Fant ikke UFOen");
+    }
+            return Ok(UFO);
+}
+
+public async Task<ActionResult> HentAlleUFOer()
         {
             List<UFO> UFOer = await _db.HentAlleUFOer();
 
