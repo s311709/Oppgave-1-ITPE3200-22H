@@ -212,9 +212,6 @@ namespace UFOApp.DAL
 
         public async Task<UFO> HentEnUFO(string kallenavn)
         {
-            //Får ikke til å ta inn noe fra klient
-            kallenavn = "Nyttårs-UFOen";
-
             try
             {
                 UFO funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == kallenavn);

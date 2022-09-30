@@ -14,7 +14,7 @@
 });
 
 function finnModellnavn(UFOnavn) {
-    $.get("UFO/HentEnUFO", UFOnavn, function (UFO) {
+    $.get("UFO/HentEnUFO?kallenavn="+ UFOnavn, function (UFO) {
         $("#modell").val(UFO.modell);
         
     });
