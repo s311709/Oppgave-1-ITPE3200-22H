@@ -27,8 +27,8 @@ namespace UFOApp.DAL
             {
 
                 //Først sjekkes det om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
-
-                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør /*&& o.Fornavn = innObservasjon.FornavnObservatør*/);
+                //Her har vi en edge case -> hva hvis to observatører har samme etternavn? Burde sjekke for både fornavn og etternavn
+                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør);
 
                 if (funnetObservatør == null)
                 {
