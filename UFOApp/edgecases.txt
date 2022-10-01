@@ -1,9 +1,1 @@
-﻿Hadde vært fint å kunne finne en observatør i databasen ved å både bruke
-etternavn og fornavn, men vet ikke hvordan man skriver den lambdafunksjonen
-
-                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør, o => o.Fornavn == innObservasjon.FornavnObservatør);
-aksepteres ikke. 
-
-Programmet burde kanskje kjenne igjen UFOnavn i lagre-skjemaet? 
-Sånn at det ikke går ann å fylle inn en ny modell hvis UFO er kjent
-fra før
+﻿
