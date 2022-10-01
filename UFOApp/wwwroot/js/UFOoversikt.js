@@ -8,7 +8,7 @@ function formaterUFOer(UFOer) {
     let ut = "<table class='table'>" +
         "<tr>" +
         "<th>ID</th><th>Kallenavn</th>" +
-        "<th>Modell</th><th>Antall Observasjoner</th><th>Sist Observert</th>" +
+        "<th>Modell</th><th>Antall Observasjoner</th><th>Sist observert</th>" +
         "</tr>";
     for (let UFO of UFOer) {
         ut += "<tr>" +
