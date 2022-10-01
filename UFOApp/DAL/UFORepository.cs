@@ -27,7 +27,6 @@ namespace UFOApp.DAL
             {
 
                 //Først sjekkes det om observatør finnes fra før, dersom den ikke gjør det lagres en ny observatør
-                //Her har vi en edge case -> hva hvis to observatører har samme etternavn? Burde sjekke for både fornavn og etternavn
                 Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == innObservasjon.EtternavnObservatør && o.Fornavn == innObservasjon.FornavnObservatør);
 
                 if (funnetObservatør == null)
@@ -264,6 +263,31 @@ namespace UFOApp.DAL
             }
         }
 
+        public async Task<Observatør> HentEnObservatør(string fornavn, string etternavn)
+        {
+            try
+            {
+                Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
 
+                var returObservatør = new Observatør
+                {
+                    Id = funnetObservatør.Id,
+                    Fornavn = funnetObservatør.Fornavn,
+                    Etternavn = funnetObservatør.Etternavn,
+                    Telefon = funnetObservatør.Telefon,
+                    Epost = funnetObservatør.Epost,
+                    AntallRegistrerteObservasjoner = funnetObservatør.AntallRegistrerteObservasjoner,
+                    SisteObservasjon = funnetObservatør.SisteObservasjon
+                };
+
+                return returObservatør;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return null;
+            }
+
+        }
     }
 }
