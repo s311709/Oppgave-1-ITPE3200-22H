@@ -131,12 +131,10 @@ namespace UFOApp.DAL
                 List<EnkeltObservasjon> alleEnkeltObservasjoner = await _db.EnkeltObservasjoner.ToListAsync();
 
                 List<Observasjon> alleObservasjoner = new List<Observasjon>();
-                //note to self: sist observert er ikke koda, og observatør er null inni alleEnkeltObservasjoner under. Den som skaper exception? mangler jeg noe
+
                 foreach (var enkeltObservasjon in alleEnkeltObservasjoner)
                 {
-                    //Har valgt å ikke ta med alle atributtene, kan dette være i en egen siden hvor man får mer info om hver observasjon?
-                    //RUTH får tidvis en nullpointersxception her når jeg lagrer et nytt objekt og den skal gå tilbake til index.html for å vise det
-
+                
                     var enObservasjon = new Observasjon
                     {
                         Id = enkeltObservasjon.Id,
@@ -234,6 +232,38 @@ namespace UFOApp.DAL
             }
 
         }
+
+        public async Task<List<Observatør>> HentAlleObservatører()
+        {
+            try
+            {
+                List<Observatør> alleObservatører = await _db.Observatører.ToListAsync();
+
+                List<Observatør> returObservatører = new List<Observatør>();
+
+                foreach (var enkeltObservatør in alleObservatører)
+                {
+                    var enObservatør = new Observatør
+                    {
+                        Id = enkeltObservatør.Id,
+                        Fornavn = enkeltObservatør.Fornavn,
+                        Etternavn = enkeltObservatør.Etternavn,
+                        Telefon = enkeltObservatør.Telefon,
+                        Epost = enkeltObservatør.Epost,
+                        AntallRegistrerteObservasjoner = enkeltObservatør.AntallRegistrerteObservasjoner,
+                        SisteObservasjon = enkeltObservatør.SisteObservasjon
+                    };
+                    returObservatører.Add(enObservatør);
+                }
+                return returObservatører;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return null;
+            }
+        }
+
 
     }
 }
