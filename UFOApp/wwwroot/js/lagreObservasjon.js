@@ -32,7 +32,7 @@ function lagreObservasjon() {
         // observatør:
         FornavnObservatør: $("#fornavn").val(),
         EtternavnObservatør: $("#etternavn").val(),
-        TelefonnummerObservatør: $("#telefonnummer").val(),
+        TelefonObservatør: $("#telefon").val(),
         EpostObservatør: $("#epost").val()
 
     }
