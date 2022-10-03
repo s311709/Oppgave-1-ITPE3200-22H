@@ -21,7 +21,7 @@ namespace UFOApp.DAL
             _log = log;
         }
 
-        public async Task<bool> Lagre(Observasjon innObservasjon)
+        public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
         {
             try
             {

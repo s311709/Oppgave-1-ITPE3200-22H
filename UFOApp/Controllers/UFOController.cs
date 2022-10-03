@@ -25,7 +25,7 @@ namespace UFOApp.Controllers
 
         public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
         {
-            return await _db.Lagre(innObservasjon);
+            return await _db.LagreObservasjon(innObservasjon);
         }
 
         public async Task<ActionResult> HentAlleObservasjoner()
