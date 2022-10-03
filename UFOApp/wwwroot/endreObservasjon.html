@@ -1,15 +1,118 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <title>UFO-registeret</title>
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="js/endreObservasjon.js"></script>
+
+    <!-- stylesheet-->
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-  <h1> Endre Observasjon </h1>
+
+    <!-- skjema -->
+    <div class="container">
+        <form class="card d-flex  col-lg-8 col-md-12">
+            <div class="header mb-5">
+                <h1>Endre observasjon</h1>
+            </div>
+            <input type="hidden" id="id" />
+            <div class="row">
+                <div class="col-4">
+                    <h2> Informasjon om observatør </h2>
+                </div>
+
+                <div class="col-8">
+                    <div class="form-floating mb-3">
+                        <!-- har brukt floating for text placeholders inni elementet, men placeholder er backup om browser ikke klarer å laste Bootstrap-skjemaet-->
+                        <input type="text" placeholder="Nils" class="form-control" id="fornavn">
+                        <label for="fornavn">Fornavn</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" placeholder="Hansson" class="form-control" id="etternavn">
+                        <label for="etternavn">Etternavn</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="telefon" placeholder="80080800" class="form-control">
+                        <label for="telefon">Telefonnummer</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" id="epost" placeholder="nils.hansson@gmail.com" class="form-control">
+                        <label for="epost">Epost</label>
+                    </div>
+                </div>
+            </div> <!-- observatørRow-->
+
+            <hr class="my-2" />
+
+
+            <div class="row">
+                <div class="col-4 text-left align-content-start">
+                    <h2> Om UFOen  </h2>
+                </div>
+
+
+                <div class="col-8">
+                    <div class="form-group mb-3">
+                        <label for="fname">Hvilken UFO så du?</label>
+                        <select class="form-control" id="inputform">
+                            <!-- her kommer alle registrerte UFOer i databasen!-->
+                            <option hidden>velg en UFO</option>
+                            <option value="0">ikke på listen</option>
+                        </select>
+                    </div>
+
+
+                    <!-- kallenavn er UFOnavn-->
+                    <div class="form-floating mb-4">
+                        <input type="text" id="UFOnavn" placeholder="UFOnavn" class="form-control">
+                        <label for="UFOnavn">Navn på UFO</label>
+                        <div> feks "RomsdalsUFO-en"</div>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="text" id="modell" placeholder="Modell" class="form-control">
+                        <label for="modell">Modell</label>
+                        <div> feks "Flygende tallerken"</div>
+                    </div>
+
+                </div>
+            </div> <!-- om UFOen row-->
+
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <!-- date and time input-->
+                    <label for="date" class="col-form-label">Tidspunkt</label>
+                    <div class="input-group date form-floating" id="datepicker">
+                        <input type="datetime-local" class="form-control" id="dato" placeholder="date" />
+                        <span class="input-group-append">
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="col-12 mb-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" id="kommune" placeholder="kommune" class="form-control">
+                        <label for="kommune">Kommune</label>
+                    </div>
+                </div>
+            </div> <!-- row-->
+
+            <div class="form-group mb-3 col-12">
+                <label for="beskrivelse">Beskrivelse av observasjonen</label>
+                <textarea id="beskrivelse" rows="3" class="form-control"></textarea>
+            </div>
+            <div id="feil"></div>
+
+        </form>
+        <button type="button" class="btn btn-primary" onclick="endreObservasjon()">Endre</button>
+    </div>
+
 </body>
 </html>
