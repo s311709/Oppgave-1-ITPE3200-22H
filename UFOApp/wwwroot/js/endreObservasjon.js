@@ -1,26 +1,26 @@
 ﻿$(function () {
 
     //hent kunden med kunde-id fra url og vis denne i skjemaet
-    const id = window.location.search.substring(1);
-    const url = "UFO/HentEnObservasjon?" + id;
+    const Id = window.location.search.substring(1);
+    const url = "UFO/HentEnObservasjon?" + Id;
 
     $.get(url, function (UFO) {
 
         //iden
-        $("#id").val(UFO.id);
+        $("#Id").val(UFO.Id);
 
         //UFOen:
-        $("#UFOnavn").val(UFO.fornavn);
-        $("#modell").val(UFO.etternavn);
-        $("#dato").val(UFO.id);
-        $("#kommune").val(UFO.id);
-        $("#beskrivelse").val(UFO.id);
+        $("#UFOnavn").val(UFO.KallenavnUFO);
+        $("#modell").val(UFO.Modell);
+        $("#dato").val(UFO.TidspunktObservert);
+        $("#kommune").val(UFO.KommuneObservert);
+        $("#beskrivelse").val(UFO.BeskrivelseAvObservasjon);
 
         //observatør:
-        $("#fornavn").val(UFO.id);
-        $("#etternavn").val(UFO.id);
-        $("#telefon").val(UFO.id);
-        $("#epost").val(UFO.id);
+        $("#fornavn").val(UFO.FornavnObservatør);
+        $("#etternavn").val(UFO.EtternavnObservatør);
+        $("#telefon").val(UFO.TelefonObservatør);
+        $("#epost").val(UFO.EpostObservatør);
 
     });
 });
@@ -29,7 +29,7 @@ function endreObservasjon() {
     const observasjon = {
 
         //iden
-        id: $("#id").val(),
+        Id: $("#Id").val(),
 
         //UFOen:
         KallenavnUFO: $("#UFOnavn").val();
