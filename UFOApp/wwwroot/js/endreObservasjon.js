@@ -1,26 +1,29 @@
 ﻿$(function () {
 
     //hent kunden med kunde-id fra url og vis denne i skjemaet
-    const Id = window.location.search.substring(1);
-    const url = "UFO/HentEnObservasjon?" + Id;
+    const id = window.location.search.substring(1);
+    const url = "UFO/HentEnObservasjon?" + id;
 
-    $.get(url, function (UFO) {
+    $.get(url, function (observasjon) {
 
         //iden
-        $("#Id").val(UFO.Id);
+
+        $("#id").val(observasjon.id);
 
         //UFOen:
-        $("#UFOnavn").val(UFO.KallenavnUFO);
-        $("#modell").val(UFO.Modell);
-        $("#dato").val(UFO.TidspunktObservert);
-        $("#kommune").val(UFO.KommuneObservert);
-        $("#beskrivelse").val(UFO.BeskrivelseAvObservasjon);
+
+        $("#UFOnavn").val(observasjon.KallenavnUFO);
+        $("#modell").val(observasjon.Modell);
+        $("#dato").val(observasjon.TidspunktObservert);
+        $("#kommune").val(observasjon.KommuneObservert);
+        $("#beskrivelse").val(observasjon.BeskrivelseAvObservasjon);
 
         //observatør:
-        $("#fornavn").val(UFO.FornavnObservatør);
-        $("#etternavn").val(UFO.EtternavnObservatør);
-        $("#telefon").val(UFO.TelefonObservatør);
-        $("#epost").val(UFO.EpostObservatør);
+
+        $("#fornavn").val(observasjon.FornavnObservatør);
+        $("#etternavn").val(observasjon.EtternavnObservatør);
+        $("#telefon").val(observasjon.TelefonObservatør);
+        $("#epost").val(observasjon.EpostObservatør);
 
     });
 });
@@ -29,7 +32,7 @@ function endreObservasjon() {
     const observasjon = {
 
         //iden
-        Id: $("#Id").val(),
+        id: $("#id").val(),
 
         //UFOen:
         KallenavnUFO: $("#UFOnavn").val();
@@ -46,7 +49,7 @@ function endreObservasjon() {
 
     };
 
-    const url= "UFO/EndreObservasjon"
+    const url = "UFO/EndreObservasjon"
     $.post(url, observasjon, function (OK) {
         if (OK) {
             window.location.href = 'index.html';
