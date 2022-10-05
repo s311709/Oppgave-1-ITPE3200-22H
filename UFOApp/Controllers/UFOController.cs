@@ -82,16 +82,13 @@ namespace UFOApp.Controllers
             return Ok(observatør);
         }
 
-        public async Task<bool> Slett(int id)
+        public bool Slett(int id)
         {
             try
             {
-                observasjon slettEnObservasjon = await _db.EnkeltObservasjoner.FindAsync(id);
-                _db.EnkeltObservasjoner.Remove(slettEnObservasjon);
-                slettObservasjon slettEnObservasjon = await _db.EnkeltObservasjoner.FindAsync(id);
-                _db.EnkeltObservasjoner.Remove(slettEnObservasjon);
+                Observasjon enObservasjon = _db.HentEnObservasjon.Find(id);
+                _db.HentEnObservasjon.Remove(enObservasjon);
                 _db.SaveChanges();
-
                 return true;
             }
             catch
