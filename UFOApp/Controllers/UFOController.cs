@@ -81,20 +81,5 @@ namespace UFOApp.Controllers
             }
             return Ok(observatør);
         }
-
-        public bool Slett(int id)
-        {
-            try
-            {
-                Observasjon enObservasjon = _db.HentEnObservasjon.Find(id);
-                _db.HentEnObservasjon.Remove(enObservasjon);
-                _db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }
