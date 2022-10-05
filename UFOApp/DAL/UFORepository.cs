@@ -21,7 +21,9 @@ namespace UFOApp.DAL
             _log = log;
         }
 
-        public async Task<bool> Lagre(Observasjon innObservasjon)
+
+        //LagreObservasjon
+        public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
         {
             try
             {
@@ -123,6 +125,8 @@ namespace UFOApp.DAL
             }
         }
 
+
+        //HentAlleObservasjoner
         public async Task<List<Observasjon>> HentAlleObservasjoner()
         {
             try
@@ -155,6 +159,8 @@ namespace UFOApp.DAL
             }
         }
 
+
+        //HentEnObservasjon
         public async Task<Observasjon> HentEnObservasjon(int id)
         {
             try
@@ -185,6 +191,34 @@ namespace UFOApp.DAL
         }
 
 
+        //EndreObservasjon
+        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
+        {
+            try
+            {
+                var endreObjekt = await _db.EnkeltObservasjoner.FindAsync(endreObservasjon.Id);
+                //enkeltObservasjon
+                endreObjekt.TidspunktObservert = endreObservasjon.TidspunktObservert;
+                endreObjekt.KommuneObservert = endreObservasjon.KommuneObservert;
+                endreObjekt.BeskrivelseAvObservasjon = endreObservasjon.BeskrivelseAvObservasjon;
+                //UFO
+                endreObjekt.ObservertUFO.Kallenavn = endreObservasjon.KallenavnUFO;
+                endreObjekt.ObservertUFO.Modell = endreObservasjon.Modell;
+                //Observatør
+                endreObjekt.Observatør.Fornavn = endreObservasjon.FornavnObservatør;
+                endreObjekt.Observatør.Etternavn = endreObservasjon.EtternavnObservatør;
+                endreObjekt.Observatør.Telefon = endreObservasjon.TelefonObservatør;
+                endreObjekt.Observatør.Epost = endreObservasjon.EpostObservatør;
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        //HentAlleUFOer
         public async Task<List<UFO>> HentAlleUFOer()
         {
             List<UFO> alleUFOer = await _db.UFOer.ToListAsync();
@@ -207,6 +241,8 @@ namespace UFOApp.DAL
             return returUFOer;
         }
 
+
+        //HentEnUFO
         public async Task<UFO> HentEnUFO(string kallenavn)
         {
             try
@@ -232,6 +268,8 @@ namespace UFOApp.DAL
 
         }
 
+
+        //HentAlleObservatører
         public async Task<List<Observatør>> HentAlleObservatører()
         {
             try
@@ -263,6 +301,8 @@ namespace UFOApp.DAL
             }
         }
 
+
+        //HentEnObservatør
         public async Task<Observatør> HentEnObservatør(string fornavn, string etternavn)
         {
             try
@@ -289,5 +329,6 @@ namespace UFOApp.DAL
             }
 
         }
+
     }
 }
