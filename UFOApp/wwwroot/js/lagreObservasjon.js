@@ -20,6 +20,13 @@ function finnModellnavn(UFOnavn) {
     });
 }
 
+//henter ut observatør fra etternavn
+function hentEnObservatør(fornavnObservatør, EtternavnObservatør) {
+    $.get("UFO/HentEnObservatør?fornavn=?etternavn=?" + FornavnObservatør + EtternavnObservatør, function (Observatør) {
+        //returnerer en observatør
+    });
+}
+
 function lagreObservasjon() {
     const observasjon = {
         //UFOen
@@ -65,7 +72,26 @@ $(function () {
             $("#UFOnavn").prop("disabled", false);
             $("#UFOnavn").val("")
             $("#modell").val("")
-            
+        }
+    });
+});
+
+//ikke ferdig, sjekk inputfelt og sjekk om get-kallet er rett
+$(function () {
+    //må tracke endring i etternavn eller fornavn?
+    $("#etternavn").change(function () {
+        //hvis en match er funnet med fornavn og etternavn
+        if (hentEnObservatør != null) {
+            $("#telefon").prop("disabled", true);
+            $("#epost").prop("disabled", true);
+            $("#telefon").val(TelefonObservatør);
+            $("#epost").val(EpostObservatør);
+        }
+        else {
+            $("#modell").prop("disabled", false);
+            $("#UFOnavn").prop("disabled", false);
+            $("#UFOnavn").val("")
+            $("#modell").val("")
         }
     });
 });
