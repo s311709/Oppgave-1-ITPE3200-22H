@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace UFOApp.Controllers
 {
@@ -24,15 +23,11 @@ namespace UFOApp.Controllers
             _log = log;
         }
 
-
-        //lagreObservasjon
         public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
         {
             return await _db.LagreObservasjon(innObservasjon);
         }
 
-
-        //HentAlleObservasjoner
         public async Task<ActionResult> HentAlleObservasjoner()
         {
             List<Observasjon> Observasjoner = await _db.HentAlleObservasjoner();
@@ -40,8 +35,6 @@ namespace UFOApp.Controllers
             return Ok(Observasjoner);
 
         }
-
-        //HentEnObservasjon
         public async Task<ActionResult> HentEnObservasjon(int id)
         {
             Observasjon observasjonen = await _db.HentEnObservasjon(id);
@@ -54,14 +47,6 @@ namespace UFOApp.Controllers
         }
 
 
-        //EndreObservasjon
-        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
-        {
-            return await _db.EndreObservasjon(endreObservasjon);
-        }
-
-
-        //HentAlleUFOer
         public async Task<ActionResult> HentAlleUFOer()
         {
             List<UFO> UFOer = await _db.HentAlleUFOer();
@@ -69,9 +54,6 @@ namespace UFOApp.Controllers
             return Ok(UFOer);
 
         }
-
-
-        //HentEnUFO
         public async Task<ActionResult> HentEnUFO(string kallenavn)
         {
             UFO UFO = await _db.HentEnUFO(kallenavn);
@@ -82,9 +64,6 @@ namespace UFOApp.Controllers
             }
             return Ok(UFO);
         }
-
-
-        //HentAlleObservatører
         public async Task<ActionResult> HentAlleObservatører()
         {
             List<Observatør> Observatører = await _db.HentAlleObservatører();
@@ -92,8 +71,6 @@ namespace UFOApp.Controllers
             return Ok(Observatører);
         }
 
-
-        //HentEnObservatør
         public async Task<ActionResult> HentEnObservatør(string fornavn, string etternavn)
         {
             Observatør observatør = await _db.HentEnObservatør(fornavn, etternavn);
@@ -104,8 +81,5 @@ namespace UFOApp.Controllers
             }
             return Ok(observatør);
         }
-
-      
-
     }
 }
