@@ -54,12 +54,6 @@ namespace UFOApp.Controllers
         }
 
 
-        //EndreObservasjon
-        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
-        {
-            return await _db.EndreObservasjon(endreObservasjon);
-        }
-
 
         //HentAlleUFOer
         public async Task<ActionResult> HentAlleUFOer()
@@ -105,7 +99,12 @@ namespace UFOApp.Controllers
             return Ok(observatør);
         }
 
-      
+        //EndreObservasjon
+        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
+        {
+            return await _db.EndreObservasjon(endreObservasjon);
+        }
+
 
     }
 }

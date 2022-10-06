@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿
+
+$(function () {
 
     //hent kunden med kunde-id fra url og vis denne i skjemaet
     const id = window.location.search.substring(1);
@@ -34,18 +36,19 @@ function endreObservasjon() {
         //iden
         id: $("#id").val(),
 
-        //UFOen:
-        KallenavnUFO: $("#UFOnavn").val();
-        Modell: $("#modell").val();
-        TidspunktObservert: $("#dato").val();
-        KommuneObservert: $("#kommune").val();
-        BeskrivelseAvObservasjon: $("#beskrivelse").val();
+        //UFO
+        KallenavnUFO: $("#UFOnavn").val(),
+        Modell: $("#modell").val(),
+        TidspunktObservert: $("#dato").val(),
+        KommuneObservert: $("#kommune").val(),
+        BeskrivelseAvObservasjon: $("#beskrivelse").val(),
 
-        //observatør:
-        FornavnObservatør: $("#fornavn").val();
-        EtternavnObservatør: $("#etternavn").val();
-        TelefonObservatør: $("#telefon").val();
-        EpostObservatør: $("#epost").val();
+        // observatør:
+
+        FornavnObservatør: $("#fornavn").val(),
+        EtternavnObservatør: $("#etternavn").val(),
+        TelefonObservatør: $("#telefon").val(),
+        EpostObservatør: $("#epost").val()
 
     };
 

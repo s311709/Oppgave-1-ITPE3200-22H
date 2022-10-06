@@ -126,6 +126,7 @@ namespace UFOApp.DAL
         }
 
 
+
         //HentAlleObservasjoner
         public async Task<List<Observasjon>> HentAlleObservasjoner()
         {
@@ -188,33 +189,6 @@ namespace UFOApp.DAL
                 return null;
             }
 
-        }
-
-
-        //EndreObservasjon
-        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
-        {
-            try
-            {
-                var endreObjekt = await _db.EnkeltObservasjoner.FindAsync(endreObservasjon.Id);
-                //enkeltObservasjon
-                endreObjekt.TidspunktObservert = endreObservasjon.TidspunktObservert;
-                endreObjekt.KommuneObservert = endreObservasjon.KommuneObservert;
-                endreObjekt.BeskrivelseAvObservasjon = endreObservasjon.BeskrivelseAvObservasjon;
-                //UFO
-                endreObjekt.ObservertUFO.Kallenavn = endreObservasjon.KallenavnUFO;
-                endreObjekt.ObservertUFO.Modell = endreObservasjon.Modell;
-                //Observatør
-                endreObjekt.Observatør.Fornavn = endreObservasjon.FornavnObservatør;
-                endreObjekt.Observatør.Etternavn = endreObservasjon.EtternavnObservatør;
-                endreObjekt.Observatør.Telefon = endreObservasjon.TelefonObservatør;
-                endreObjekt.Observatør.Epost = endreObservasjon.EpostObservatør;
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
         }
 
 
@@ -329,6 +303,35 @@ namespace UFOApp.DAL
             }
 
         }
+
+
+        //EndreObservasjon
+        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
+        {
+            try
+            {
+                var endreObjekt = await _db.EnkeltObservasjoner.FindAsync(endreObservasjon.Id);
+                //enkeltObservasjon
+                endreObjekt.TidspunktObservert = endreObservasjon.TidspunktObservert;
+                endreObjekt.KommuneObservert = endreObservasjon.KommuneObservert;
+                endreObjekt.BeskrivelseAvObservasjon = endreObservasjon.BeskrivelseAvObservasjon;
+                //UFO
+                endreObjekt.ObservertUFO.Kallenavn = endreObservasjon.KallenavnUFO;
+                endreObjekt.ObservertUFO.Modell = endreObservasjon.Modell;
+                //Observatør
+                endreObjekt.Observatør.Fornavn = endreObservasjon.FornavnObservatør;
+                endreObjekt.Observatør.Etternavn = endreObservasjon.EtternavnObservatør;
+                endreObjekt.Observatør.Telefon = endreObservasjon.TelefonObservatør;
+                endreObjekt.Observatør.Epost = endreObservasjon.EpostObservatør;
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+
 
     }
 }
