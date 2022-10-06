@@ -34,7 +34,6 @@ function finnModellnavn(UFOnavn) {
 
 //henter ut observatør fra etternavn
 function hentEnObservatør(fornavn, etternavn) {
-    //prøver å se om fornavn er fornavn til en observatør
         try {
             $.get("UFO/HentEnObservatør?fornavn=" + fornavn + "&etternavn=" + etternavn, function (Observatør) {
                 if (Observatør) {
@@ -43,7 +42,6 @@ function hentEnObservatør(fornavn, etternavn) {
                     $("#telefon").prop("disabled", true);
                     $("#epost").prop("disabled", true);
                     console.log("fant observatør")
-                    //                 return Observatør.etternavn
                 }
                 else {
                     console.log("ingen data")
@@ -51,12 +49,7 @@ function hentEnObservatør(fornavn, etternavn) {
             });
         }
         catch (error) {
-            //Response.StatusCode != StatusCode.NotFound
-            // "Fant ikke observatøren"
-            //       if (Response == 404) {
             console.log("error")
-            $("#telefon").val("")
-            $("#epost").val("")
         }
 
 }
@@ -113,8 +106,12 @@ $(function () {
 
 //ikke ferdig, sjekk inputfelt og sjekk om get-kallet er rett
 $(function () {
-    //må tracke endring i etternavn eller fornavn?
     $("#etternavn").change(function () {
+        //nullstiller feltene når etternavn endres
+        $("#telefon").val("")
+        $("#epost").val("")
+        $("#telefon").prop("disabled", false);
+        $("#epost").prop("disabled", false);
 
         //henter verdier fra tekstfelt
         var etternavn = $("#etternavn").val();
@@ -123,27 +120,5 @@ $(function () {
         //initierer get-kallet som finner observatøren i DB
         var observatør = hentEnObservatør(fornavn, etternavn)
 
-        $("#telefon").on("focus", function () {
-            var telefon = $("#telefon").val();
-            console.log(telefon)
-            console.log("focus epost")
-            //hvis en match er funnet med fornavn og etternavn fylles telefon og epost automatisk i get
-            /*if (telefon != "") {
-                $("#telefon").prop("disabled", true);
-                $("#epost").prop("disabled", true);
-                console.log("disabled")
-            }*/
-            if (telefon == null | telefon == "") {
-                $("#telefon").prop("disabled", false);
-                $("#epost").prop("disabled", false);
-                //   $("#telefon").val("")
-                //   $("#epost").val("")
-                console.log("enabled")
-            }
-            else {
-                $("#telefon").val("")
-                $("#epost").val("")
-            }
-        });
     });
 });
