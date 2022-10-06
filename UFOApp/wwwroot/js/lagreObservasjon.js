@@ -15,13 +15,12 @@
 });
 
 //tester om man får hentet ut observasjoner
-$(document).ready(function () {
-    $(function () {
-        $.get("Observasjon/HentAlleObservasjoner", function (Observasjoner) {
-            console.log(Observasjoner)
+//$(document).ready(function () {
+    function hentAlleObservatører() {
+        $.get("UFO/HentAlleObservatører", function (Observatør) {
         });
-    });
-});
+    };
+//});
 
 function finnModellnavn(UFOnavn) {
     $.get("UFO/HentEnUFO?kallenavn=" + UFOnavn, function (UFO) {
@@ -35,25 +34,33 @@ function finnModellnavn(UFOnavn) {
 
 //henter ut observatør fra etternavn
 function hentEnObservatør(fornavn, etternavn) {
-    console.log("prøver get")
-    $.get("Observatør/HentEnObservatør?fornavn=" + fornavn + "&etternavn=" + etternavn, function (Observatør) {
-        $("#telefon").val(Observatør.telefonObservatør)
-        console.log(Observatør)
-        //returnerer en observatør
-    });
+    //prøver å se om fornavn er fornavn til en observatør
+        try {
+            $.get("UFO/HentEnObservatør?fornavn=" + fornavn + "&etternavn=" + etternavn, function (Observatør) {
+                if (Observatør) {
+                    $("#telefon").val(Observatør.telefon)
+                    $("#epost").val(Observatør.epost)
+                    $("#telefon").prop("disabled", true);
+                    $("#epost").prop("disabled", true);
+                    console.log("fant observatør")
+                    //                 return Observatør.etternavn
+                }
+                else {
+                    console.log("ingen data")
+                }
+            });
+        }
+        catch (error) {
+            //Response.StatusCode != StatusCode.NotFound
+            // "Fant ikke observatøren"
+            //       if (Response == 404) {
+            console.log("error")
+            $("#telefon").val("")
+            $("#epost").val("")
+        }
+
 }
 
-/*
-//henter ut observatør fra etternavn
-function hentEnObservatør(fornavn, etternavn) {
-    console.log("prøver get")
-    $.get("Observatør/HentEnObservatør", { fornavn, etternavn}).done( function (Observatør) {
-        $("#telefon").val(Observatør.telefonObservatør)
-        console.log(Observatør)
-        //returnerer en observatør
-    });
-}
-*/
 
 function lagreObservasjon() {
     const observasjon = {
@@ -109,26 +116,34 @@ $(function () {
     //må tracke endring i etternavn eller fornavn?
     $("#etternavn").change(function () {
 
-        //verdien av etternavn-feltet
+        //henter verdier fra tekstfelt
         var etternavn = $("#etternavn").val();
         var fornavn = $("#fornavn").val();
-        var Observatør = hentEnObservatør(fornavn, etternavn)
-        console.log(etternavn)
-        console.log("observatør:" + Observatør);
-        //hvis en match er funnet med fornavn og etternavn
-        if (hentEnObservatør.etternavn == etternavn) {
-            $("#telefon").prop("disabled", true);
-            $("#epost").prop("disabled", true);
-            console.log("inni henten != null");
-           // $("#telefon").val(TelefonObservatør);
-           // $("#epost").val(EpostObservatør);
-        }
-        else {
-            $("#telefon").prop("disabled", false);
-            $("#epost").prop("disabled", false);
-            $("#telefon").val("")
-            $("#epost").val("")
-            console.log("inni henten else");
-        }
+
+        //initierer get-kallet som finner observatøren i DB
+        var observatør = hentEnObservatør(fornavn, etternavn)
+
+        $("#telefon").on("focus", function () {
+            var telefon = $("#telefon").val();
+            console.log(telefon)
+            console.log("focus epost")
+            //hvis en match er funnet med fornavn og etternavn fylles telefon og epost automatisk i get
+            /*if (telefon != "") {
+                $("#telefon").prop("disabled", true);
+                $("#epost").prop("disabled", true);
+                console.log("disabled")
+            }*/
+            if (telefon == null | telefon == "") {
+                $("#telefon").prop("disabled", false);
+                $("#epost").prop("disabled", false);
+                //   $("#telefon").val("")
+                //   $("#epost").val("")
+                console.log("enabled")
+            }
+            else {
+                $("#telefon").val("")
+                $("#epost").val("")
+            }
+        });
     });
 });
