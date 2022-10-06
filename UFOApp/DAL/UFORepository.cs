@@ -267,19 +267,21 @@ namespace UFOApp.DAL
         {
             try
             {
+                //Ønsker at den skal returnere en tom observatør dersom den ikke finner noe
+                Observatør returObservatør = new Observatør();
+
                 Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
+                if (funnetObservatør != null) {
 
-                var returObservatør = new Observatør
-                {
-                    Id = funnetObservatør.Id,
-                    Fornavn = funnetObservatør.Fornavn,
-                    Etternavn = funnetObservatør.Etternavn,
-                    Telefon = funnetObservatør.Telefon,
-                    Epost = funnetObservatør.Epost,
-                    AntallRegistrerteObservasjoner = funnetObservatør.AntallRegistrerteObservasjoner,
-                    SisteObservasjon = funnetObservatør.SisteObservasjon
+                    returObservatør.Id = funnetObservatør.Id;
+                    returObservatør.Fornavn = funnetObservatør.Fornavn;
+                    returObservatør.Etternavn = funnetObservatør.Etternavn;
+                    returObservatør.Telefon = funnetObservatør.Telefon;
+                    returObservatør.Epost = funnetObservatør.Epost;
+                    returObservatør.AntallRegistrerteObservasjoner = funnetObservatør.AntallRegistrerteObservasjoner;
+                    returObservatør.SisteObservasjon = funnetObservatør.SisteObservasjon;
                 };
-
+                
                 return returObservatør;
             }
             catch (Exception e)

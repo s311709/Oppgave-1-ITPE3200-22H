@@ -36,7 +36,7 @@ function finnModellnavn(UFOnavn) {
 function hentEnObservatør(fornavn, etternavn) {
         try {
             $.get("UFO/HentEnObservatør?fornavn=" + fornavn + "&etternavn=" + etternavn, function (Observatør) {
-                if (Observatør) {
+                if (Observatør.fornavn != null) {
                     $("#telefon").val(Observatør.telefon)
                     $("#epost").val(Observatør.epost)
                     $("#telefon").prop("disabled", true);
