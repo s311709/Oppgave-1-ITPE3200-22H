@@ -11,21 +11,49 @@
             $("#inputform").append('<option>' + UFO.kallenavn + '</option>');
         }
     }
+
+});
+
+//tester om man får hentet ut observasjoner
+$(document).ready(function () {
+    $(function () {
+        $.get("Observasjon/HentAlleObservasjoner", function (Observasjoner) {
+            console.log(Observasjoner)
+        });
+    });
 });
 
 function finnModellnavn(UFOnavn) {
-    $.get("UFO/HentEnUFO?kallenavn="+ UFOnavn, function (UFO) {
+    $.get("UFO/HentEnUFO?kallenavn=" + UFOnavn, function (UFO) {
         $("#modell").val(UFO.modell);
         
     });
 }
 
+
+
+
 //henter ut observatør fra etternavn
-function hentEnObservatør(fornavnObservatør, EtternavnObservatør) {
-    $.get("UFO/HentEnObservatør?fornavn=?etternavn=?" + FornavnObservatør + EtternavnObservatør, function (Observatør) {
+function hentEnObservatør(fornavn, etternavn) {
+    console.log("prøver get")
+    $.get("Observatør/HentEnObservatør?fornavn=" + fornavn + "&etternavn=" + etternavn, function (Observatør) {
+        $("#telefon").val(Observatør.telefonObservatør)
+        console.log(Observatør)
         //returnerer en observatør
     });
 }
+
+/*
+//henter ut observatør fra etternavn
+function hentEnObservatør(fornavn, etternavn) {
+    console.log("prøver get")
+    $.get("Observatør/HentEnObservatør", { fornavn, etternavn}).done( function (Observatør) {
+        $("#telefon").val(Observatør.telefonObservatør)
+        console.log(Observatør)
+        //returnerer en observatør
+    });
+}
+*/
 
 function lagreObservasjon() {
     const observasjon = {
@@ -80,18 +108,27 @@ $(function () {
 $(function () {
     //må tracke endring i etternavn eller fornavn?
     $("#etternavn").change(function () {
+
+        //verdien av etternavn-feltet
+        var etternavn = $("#etternavn").val();
+        var fornavn = $("#fornavn").val();
+        var Observatør = hentEnObservatør(fornavn, etternavn)
+        console.log(etternavn)
+        console.log("observatør:" + Observatør);
         //hvis en match er funnet med fornavn og etternavn
-        if (hentEnObservatør != null) {
+        if (hentEnObservatør.etternavn == etternavn) {
             $("#telefon").prop("disabled", true);
             $("#epost").prop("disabled", true);
-            $("#telefon").val(TelefonObservatør);
-            $("#epost").val(EpostObservatør);
+            console.log("inni henten != null");
+           // $("#telefon").val(TelefonObservatør);
+           // $("#epost").val(EpostObservatør);
         }
         else {
-            $("#modell").prop("disabled", false);
-            $("#UFOnavn").prop("disabled", false);
-            $("#UFOnavn").val("")
-            $("#modell").val("")
+            $("#telefon").prop("disabled", false);
+            $("#epost").prop("disabled", false);
+            $("#telefon").val("")
+            $("#epost").val("")
+            console.log("inni henten else");
         }
     });
 });
