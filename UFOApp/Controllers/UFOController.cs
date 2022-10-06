@@ -100,9 +100,15 @@ namespace UFOApp.Controllers
         }
 
         //EndreObservasjon
-        public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
+        public async Task<ActionResult> EndreObservasjon(Observasjon endreObservasjon)
         {
-            return await _db.EndreObservasjon(endreObservasjon);
+            bool returnOK = await _db.EndreObservasjon(endreObservasjon);
+            if(!returnOK)
+            {
+                _log.LogInformation("Endringene kunne ikke utføres");
+                return NotFound("Endringene av Observasjonen kunne ikke utføres");
+            }
+            return Ok("Observasjon endret");
         }
 
 
