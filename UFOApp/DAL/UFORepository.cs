@@ -63,7 +63,7 @@ namespace UFOApp.DAL
                     };
                     _db.UFOer.Add(nyUFOrad);
                     await _db.SaveChangesAsync();
-                    //hva gjør denne?
+                    //Henter ny UFO fra databasen
                     funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == innObservasjon.KallenavnUFO);
                     
                 }
