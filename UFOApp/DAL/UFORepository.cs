@@ -84,8 +84,8 @@ namespace UFOApp.DAL
 
                 //Så legges EnkeltObservasjon inn i listene til UFO og Observatør
 
-                // funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
-                // funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
+                funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
+                funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
 
                 //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
 
