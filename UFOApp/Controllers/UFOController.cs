@@ -47,6 +47,7 @@ namespace UFOApp.Controllers
         }
 
 
+        //HentAlleUFOer
         public async Task<ActionResult> HentAlleUFOer()
         {
             List<UFO> UFOer = await _db.HentAlleUFOer();
@@ -81,5 +82,19 @@ namespace UFOApp.Controllers
             }
             return Ok(observatør);
         }
+        
+        //EndreObservasjon
+        public async Task<ActionResult> EndreObservasjon(Observasjon endreObservasjon)
+        {
+            bool returnOK = await _db.EndreObservasjon(endreObservasjon);
+            if(!returnOK)
+            {
+                _log.LogInformation("Endringene kunne ikke utføres");
+                return NotFound("Endringene av Observasjonen kunne ikke utføres");
+            }
+            return Ok("Observasjon endret");
+        }
+
+
     }
 }
