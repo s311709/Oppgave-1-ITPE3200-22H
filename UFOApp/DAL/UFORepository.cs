@@ -21,8 +21,6 @@ namespace UFOApp.DAL
             _log = log;
         }
 
-
-        //LagreObservasjon
         public async Task<bool> LagreObservasjon(Observasjon innObservasjon)
         {
             try
@@ -65,7 +63,7 @@ namespace UFOApp.DAL
                     };
                     _db.UFOer.Add(nyUFOrad);
                     await _db.SaveChangesAsync();
-                    //hva gjør denne?
+                    //Henter ny UFO fra databasen
                     funnetUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Kallenavn == innObservasjon.KallenavnUFO);
                     
                 }
@@ -86,8 +84,8 @@ namespace UFOApp.DAL
 
                 //Så legges EnkeltObservasjon inn i listene til UFO og Observatør
 
-                // funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
-                // funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
+                funnetUFO.Observasjoner.Add(nyEnkeltObservasjonRad);
+                funnetObservatør.RegistrerteObservasjoner.Add(nyEnkeltObservasjonRad);
 
                 //Til slutt oppdateres UFO og Observatør sine atributter antallObservasjoner og sistObservert
 
@@ -125,8 +123,6 @@ namespace UFOApp.DAL
             }
         }
 
-
-
         //HentAlleObservasjoner
         public async Task<List<Observasjon>> HentAlleObservasjoner()
         {
@@ -160,8 +156,6 @@ namespace UFOApp.DAL
             }
         }
 
-
-        //HentEnObservasjon
         public async Task<Observasjon> HentEnObservasjon(int id)
         {
             try
@@ -191,7 +185,6 @@ namespace UFOApp.DAL
 
         }
 
-
         //HentAlleUFOer
         public async Task<List<UFO>> HentAlleUFOer()
         {
@@ -215,8 +208,6 @@ namespace UFOApp.DAL
             return returUFOer;
         }
 
-
-        //HentEnUFO
         public async Task<UFO> HentEnUFO(string kallenavn)
         {
             try
@@ -242,8 +233,6 @@ namespace UFOApp.DAL
 
         }
 
-
-        //HentAlleObservatører
         public async Task<List<Observatør>> HentAlleObservatører()
         {
             try
@@ -275,25 +264,25 @@ namespace UFOApp.DAL
             }
         }
 
-
-        //HentEnObservatør
         public async Task<Observatør> HentEnObservatør(string fornavn, string etternavn)
         {
             try
             {
+                //Ønsker at den skal returnere en tom observatør dersom den ikke finner noe
+                Observatør returObservatør = new Observatør();
+
                 Observatør funnetObservatør = await _db.Observatører.FirstOrDefaultAsync(o => o.Etternavn == etternavn && o.Fornavn == fornavn);
+                if (funnetObservatør != null) {
 
-                var returObservatør = new Observatør
-                {
-                    Id = funnetObservatør.Id,
-                    Fornavn = funnetObservatør.Fornavn,
-                    Etternavn = funnetObservatør.Etternavn,
-                    Telefon = funnetObservatør.Telefon,
-                    Epost = funnetObservatør.Epost,
-                    AntallRegistrerteObservasjoner = funnetObservatør.AntallRegistrerteObservasjoner,
-                    SisteObservasjon = funnetObservatør.SisteObservasjon
+                    returObservatør.Id = funnetObservatør.Id;
+                    returObservatør.Fornavn = funnetObservatør.Fornavn;
+                    returObservatør.Etternavn = funnetObservatør.Etternavn;
+                    returObservatør.Telefon = funnetObservatør.Telefon;
+                    returObservatør.Epost = funnetObservatør.Epost;
+                    returObservatør.AntallRegistrerteObservasjoner = funnetObservatør.AntallRegistrerteObservasjoner;
+                    returObservatør.SisteObservasjon = funnetObservatør.SisteObservasjon;
                 };
-
+                
                 return returObservatør;
             }
             catch (Exception e)
@@ -303,8 +292,7 @@ namespace UFOApp.DAL
             }
 
         }
-
-
+        
         //EndreObservasjon
         public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
         {
@@ -330,8 +318,6 @@ namespace UFOApp.DAL
             }
             return true;
         }
-
-
 
     }
 }

@@ -11,14 +11,49 @@
             $("#inputform").append('<option>' + UFO.kallenavn + '</option>');
         }
     }
+
 });
 
+//tester om man får hentet ut observasjoner
+//$(document).ready(function () {
+    function hentAlleObservatører() {
+        $.get("UFO/HentAlleObservatører", function (Observatør) {
+        });
+    };
+//});
+
 function finnModellnavn(UFOnavn) {
-    $.get("UFO/HentEnUFO?kallenavn="+ UFOnavn, function (UFO) {
+    $.get("UFO/HentEnUFO?kallenavn=" + UFOnavn, function (UFO) {
         $("#modell").val(UFO.modell);
         
     });
 }
+
+
+
+
+//henter ut observatør fra etternavn
+function hentEnObservatør(fornavn, etternavn) {
+        try {
+            $.get("UFO/HentEnObservatør?fornavn=" + fornavn + "&etternavn=" + etternavn, function (Observatør) {
+                if (Observatør.fornavn != null) {
+                    $("#telefon").val(Observatør.telefon)
+                    $("#epost").val(Observatør.epost)
+                    $("#telefon").prop("disabled", true);
+                    $("#epost").prop("disabled", true);
+                    console.log("fant observatør")
+                }
+                else {
+                    console.log("ingen data")
+                }
+            });
+        }
+        catch (error) {
+            console.log("error")
+        }
+
+}
+
 
 function lagreObservasjon() {
     const observasjon = {
@@ -65,7 +100,25 @@ $(function () {
             $("#UFOnavn").prop("disabled", false);
             $("#UFOnavn").val("")
             $("#modell").val("")
-            
         }
+    });
+});
+
+//ikke ferdig, sjekk inputfelt og sjekk om get-kallet er rett
+$(function () {
+    $("#etternavn").change(function () {
+        //nullstiller feltene når etternavn endres
+        $("#telefon").val("")
+        $("#epost").val("")
+        $("#telefon").prop("disabled", false);
+        $("#epost").prop("disabled", false);
+
+        //henter verdier fra tekstfelt
+        var etternavn = $("#etternavn").val();
+        var fornavn = $("#fornavn").val();
+
+        //initierer get-kallet som finner observatøren i DB
+        var observatør = hentEnObservatør(fornavn, etternavn)
+
     });
 });
