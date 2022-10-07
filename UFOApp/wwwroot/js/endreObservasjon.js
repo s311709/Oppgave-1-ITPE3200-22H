@@ -22,7 +22,7 @@ function finnModellnavn(UFOnavn) {
 
 $(function () {
 
-    //hent kunden med kunde-id fra url og vis denne i skjemaet
+    //hent UFO med id fra url og viser denne i skjemaet
     const id = window.location.search.substring(1);
     const url = "UFO/HentEnObservasjon?" + id;
 
@@ -34,18 +34,18 @@ $(function () {
 
         //UFOen:
 
-        $("#UFOnavn").val(observasjon.KallenavnUFO);
-        $("#modell").val(observasjon.Modell);
-        $("#dato").val(observasjon.TidspunktObservert);
-        $("#kommune").val(observasjon.KommuneObservert);
-        $("#beskrivelse").val(observasjon.BeskrivelseAvObservasjon);
+        $("#UFOnavn").val(observasjon.kallenavnUFO);
+        $("#modell").val(observasjon.modell);
+        $("#dato").val(observasjon.tidspunktObservert);
+        $("#kommune").val(observasjon.kommuneObservert);
+        $("#beskrivelse").val(observasjon.beskrivelseAvObservasjon);
 
         //observatør:
 
-        $("#fornavn").val(observasjon.FornavnObservatør);
-        $("#etternavn").val(observasjon.EtternavnObservatør);
-        $("#telefon").val(observasjon.TelefonObservatør);
-        $("#epost").val(observasjon.EpostObservatør);
+        $("#fornavn").val(observasjon.fornavnObservatør);
+        $("#etternavn").val(observasjon.etternavnObservatør);
+        $("#telefon").val(observasjon.telefonObservatør);
+        $("#epost").val(observasjon.epostObservatør);
 
     });
 });

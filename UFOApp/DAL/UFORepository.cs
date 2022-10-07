@@ -292,24 +292,81 @@ namespace UFOApp.DAL
             }
 
         }
-        
+
         //EndreObservasjon
         public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
         {
             try
             {
                 var endreObjekt = await _db.EnkeltObservasjoner.FindAsync(endreObservasjon.Id);
-                
+
+                //enkeltObservasjon
+                endreObjekt.TidspunktObservert = endreObservasjon.TidspunktObservert;
+                endreObjekt.KommuneObservert = endreObservasjon.KommuneObservert;
+                endreObjekt.BeskrivelseAvObservasjon = endreObservasjon.BeskrivelseAvObservasjon;
+
+                //UFO
+                endreObjekt.ObservertUFO.Kallenavn = endreObservasjon.KallenavnUFO;
+                endreObjekt.ObservertUFO.Modell = endreObservasjon.Modell;
+
+                //Observatør
+                endreObjekt.Observatør.Fornavn = endreObservasjon.FornavnObservatør;
+                endreObjekt.Observatør.Etternavn = endreObservasjon.EtternavnObservatør;
+                endreObjekt.Observatør.Telefon = endreObservasjon.TelefonObservatør;
+                endreObjekt.Observatør.Epost = endreObservasjon.EpostObservatør;
+
+                //Sist observert resettes
+                await OppdaterSisteObservasjon(endreObjekt.ObservertUFO, endreObjekt.Observatør);
+
+                await _db.SaveChangesAsync();
+
             }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
 
+        public async Task<bool> OppdaterSisteObservasjon(UFO innUFO, Observatør innObservatør)
+        {
+            try
+            {
+                innUFO.SistObservert = new DateTime();
+                innObservatør.SisteObservasjon = new DateTime();
 
+                foreach (EnkeltObservasjon observasjon in innUFO.Observasjoner)
+                {
+
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > innUFO.SistObservert)
+                    {
+                        innUFO.SistObservert = observasjon.TidspunktObservert;
+                    }
+                }
+
+                foreach (EnkeltObservasjon observasjon in innObservatør.RegistrerteObservasjoner)
+                {
+
+                    //setter SistObservert-atributten
+                    if (observasjon.TidspunktObservert > innObservatør.SisteObservasjon)
+                    {
+                        innObservatør.SisteObservasjon = observasjon.TidspunktObservert;
+                    }
+                }
+                await _db.SaveChangesAsync();
+                return true;
+            }
             catch (Exception e)
             {
                 _log.LogInformation(e.Message);
                 return false;
             }
-            return true;
         }
+
+
+
+
 
     }
 }
