@@ -299,21 +299,13 @@ namespace UFOApp.DAL
             try
             {
                 var endreObjekt = await _db.EnkeltObservasjoner.FindAsync(endreObservasjon.Id);
-                //enkeltObservasjon
-                endreObjekt.TidspunktObservert = endreObservasjon.TidspunktObservert;
-                endreObjekt.KommuneObservert = endreObservasjon.KommuneObservert;
-                endreObjekt.BeskrivelseAvObservasjon = endreObservasjon.BeskrivelseAvObservasjon;
-                //UFO
-                endreObjekt.ObservertUFO.Kallenavn = endreObservasjon.KallenavnUFO;
-                endreObjekt.ObservertUFO.Modell = endreObservasjon.Modell;
-                //Observatør
-                endreObjekt.Observatør.Fornavn = endreObservasjon.FornavnObservatør;
-                endreObjekt.Observatør.Etternavn = endreObservasjon.EtternavnObservatør;
-                endreObjekt.Observatør.Telefon = endreObservasjon.TelefonObservatør;
-                endreObjekt.Observatør.Epost = endreObservasjon.EpostObservatør;
+                
             }
-            catch
+
+
+            catch (Exception e)
             {
+                _log.LogInformation(e.Message);
                 return false;
             }
             return true;

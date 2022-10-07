@@ -83,6 +83,7 @@ function lagreObservasjon() {
 }
 
 //  disabler modell/navn på UFO om man velger en allerede oppdaget UFO i dropdown
+
 $(function () {
     $("#inputform").change(function () {
 

@@ -1,4 +1,24 @@
-﻿
+﻿$(document).ready(function () {
+    //henter ut UFO-objekter til dropdown list
+    $(function () {
+        $.get("UFO/HentAlleUFOer", function (UFOer) {
+            formaterUFOer(UFOer);
+        });
+    });
+
+    function formaterUFOer(UFOer) {
+        for (let UFO of UFOer) {
+            $("#inputform").append('<option>' + UFO.kallenavn + '</option>');
+        }
+    }
+});
+
+function finnModellnavn(UFOnavn) {
+    $.get("UFO/HentEnUFO?kallenavn=" + UFOnavn, function (UFO) {
+        $("#modell").val(UFO.modell);
+
+    });
+}
 
 $(function () {
 
@@ -53,12 +73,34 @@ function endreObservasjon() {
     };
 
     const url = "UFO/EndreObservasjon"
-    $.post(url, observasjon, function (OK) {
-        if (OK) {
-            window.location.href = 'index.html';
+    $.post(url, observasjon, function () {
+        window.location.href = 'index.html';
+    })
+    .fail(function () {
+            $("#feil").html("Feil på server - prøv igjen senere");
+    });
+}
+
+//  disabler modell/navn på UFO om man velger en allerede oppdaget UFO i dropdown
+
+$(function () {
+    $("#inputform").change(function () {
+
+        // henter ut text fra selected option
+        var UFOnavn = $(this).children("option:selected").text();
+
+        if (UFOnavn != "ikke på listen") {
+            finnModellnavn(UFOnavn);
+            $("#modell").prop("disabled", true);
+            $("#UFOnavn").prop("disabled", true);
+            $("#UFOnavn").val(UFOnavn)
         }
         else {
-            $("#feil").html("Feil i db ved endring - prøv igjen senere")
+            $("#modell").prop("disabled", false);
+            $("#UFOnavn").prop("disabled", false);
+            $("#UFOnavn").val("")
+            $("#modell").val("")
+
         }
     });
-};
+});
