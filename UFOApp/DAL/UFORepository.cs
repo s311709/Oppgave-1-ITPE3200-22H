@@ -328,6 +328,42 @@ namespace UFOApp.DAL
             return true;
         }
 
+        public async Task<bool> SlettObservasjon(int id)
+        {
+            try
+            {
+                //Finner observasjon som skal slettes
+                EnkeltObservasjon enkeltObservasjon = await _db.EnkeltObservasjoner.FindAsync(id);
+
+                //Finner tilknyttet UFO og observatør
+                UFO enkeltObservasjonUFO = await _db.UFOer.FirstOrDefaultAsync(u => u.Id == enkeltObservasjon.ObservertUFO.Id);
+                Observatør enkeltObservasjonObservator = await _db.Observatører.FirstOrDefaultAsync(o => o.Id == enkeltObservasjon.Observatør.Id);
+
+                //Fjerner observasjonen fra listene
+                enkeltObservasjonUFO.Observasjoner.Remove(enkeltObservasjon);
+                enkeltObservasjonObservator.RegistrerteObservasjoner.Remove(enkeltObservasjon);
+
+                //Dekrementerer antall ganger observert teller
+                enkeltObservasjonUFO.GangerObservert--;
+                enkeltObservasjonObservator.AntallRegistrerteObservasjoner--;
+
+                //Sist observert resettes
+                await OppdaterSisteObservasjon(enkeltObservasjonUFO, enkeltObservasjonObservator);
+
+                //Enkeltobservasjon fjernes fra databasen
+                _db.EnkeltObservasjoner.Remove(enkeltObservasjon);
+
+                //Endringer i databasen lagres
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+        }
+
         public async Task<bool> OppdaterSisteObservasjon(UFO innUFO, Observatør innObservatør)
         {
             try

@@ -17,6 +17,7 @@ namespace UFOApp.DAL
         Task<List<Observatør>> HentAlleObservatører();
         Task<Observatør> HentEnObservatør(string fornavn, string etternavn);
         Task<bool> EndreObservasjon(Observasjon endreObservasjon);
+        Task<bool> SlettObservasjon(int id);
 
     }
 
