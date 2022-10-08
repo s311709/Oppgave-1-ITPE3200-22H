@@ -92,26 +92,8 @@ namespace UFOApp.DAL
                 funnetObservatør.AntallRegistrerteObservasjoner++;
                 funnetUFO.GangerObservert++;
 
-                foreach (EnkeltObservasjon observasjon in funnetUFO.Observasjoner)
-                {
-                    
-                    //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > funnetUFO.SistObservert)
-                    {
-                        funnetUFO.SistObservert = observasjon.TidspunktObservert;
-                    }
-                }
+                await OppdaterSisteObservasjon(funnetUFO, funnetObservatør);
 
-                foreach (EnkeltObservasjon observasjon in funnetObservatør.RegistrerteObservasjoner)
-                {
-                   
-                    //setter SistObservert-atributten
-                    if (observasjon.TidspunktObservert > funnetObservatør.SisteObservasjon)
-                    {
-                        funnetObservatør.SisteObservasjon = observasjon.TidspunktObservert;
-                    }
-                }
-               
                 await _db.SaveChangesAsync();
 
                 return true;
