@@ -99,8 +99,9 @@ namespace UFOApp.DAL
                 return true;
 
             }
-            catch
+            catch (Exception e)
             {
+                _log.LogInformation(e.Message);
                 return false;
             }
         }
@@ -170,6 +171,7 @@ namespace UFOApp.DAL
         //HentAlleUFOer
         public async Task<List<UFO>> HentAlleUFOer()
         {
+            try { 
             List<UFO> alleUFOer = await _db.UFOer.ToListAsync();
 
             List<UFO> returUFOer = new List<UFO>();
@@ -188,6 +190,12 @@ namespace UFOApp.DAL
             }
 
             return returUFOer;
+            } 
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return null;
+            }
         }
 
         public async Task<UFO> HentEnUFO(string kallenavn)
@@ -275,7 +283,6 @@ namespace UFOApp.DAL
 
         }
 
-        //EndreObservasjon
         public async Task<bool> EndreObservasjon(Observasjon endreObservasjon)
         {
             try
@@ -303,8 +310,9 @@ namespace UFOApp.DAL
                 await _db.SaveChangesAsync();
 
             }
-            catch
+            catch (Exception e)
             {
+                _log.LogInformation(e.Message);
                 return false;
             }
             return true;
@@ -381,9 +389,6 @@ namespace UFOApp.DAL
                 return false;
             }
         }
-
-
-
 
 
     }
