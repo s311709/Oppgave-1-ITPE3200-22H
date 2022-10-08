@@ -5,7 +5,7 @@
 });
 
 function formaterUFOer(UFOer) {
-    let ut = "<table class='table'>" +
+    let ut = "<table class='table table-striped'>" +
         "<tr>" +
         "<th>ID</th><th>Kallenavn</th>" +
         "<th>Modell</th><th>Antall Observasjoner</th><th>Sist observert</th>" +

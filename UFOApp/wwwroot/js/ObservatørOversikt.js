@@ -5,7 +5,7 @@
 });
 
 function formaterUFOer(Observatører) {
-    let ut = "<table class='table'>" +
+    let ut = "<table class='table table-striped'>" +
         "<tr>" +
         "<th>Id</th><th>Fornavn</th><th>Etternavn</th>" +
         "<th>Telefon</th><th>Epost</th>" +
