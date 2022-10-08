@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     //henter ut UFO-objekter til dropdown list
     $(function () {
         $.get("UFO/HentAlleUFOer", function (UFOer) {
@@ -16,7 +17,6 @@
 function finnModellnavn(UFOnavn) {
     $.get("UFO/HentEnUFO?kallenavn=" + UFOnavn, function (UFO) {
         $("#modell").val(UFO.modell);
-
     });
 }
 
@@ -28,12 +28,10 @@ $(function () {
 
     $.get(url, function (observasjon) {
 
-        //iden
-
+        //iden  
         $("#id").val(observasjon.id);
 
-        //UFOen:
-
+        //UFOen: 
         $("#UFOnavn").val(observasjon.kallenavnUFO);
         $("#modell").val(observasjon.modell);
         $("#dato").val(observasjon.tidspunktObservert);
@@ -41,7 +39,6 @@ $(function () {
         $("#beskrivelse").val(observasjon.beskrivelseAvObservasjon);
 
         //observatør:
-
         $("#fornavn").val(observasjon.fornavnObservatør);
         $("#etternavn").val(observasjon.etternavnObservatør);
         $("#telefon").val(observasjon.telefonObservatør);
@@ -53,7 +50,7 @@ $(function () {
 function endreObservasjon() {
     const observasjon = {
 
-        //iden
+        //iden 
         id: $("#id").val(),
 
         //UFO
@@ -64,7 +61,6 @@ function endreObservasjon() {
         BeskrivelseAvObservasjon: $("#beskrivelse").val(),
 
         // observatør:
-
         FornavnObservatør: $("#fornavn").val(),
         EtternavnObservatør: $("#etternavn").val(),
         TelefonObservatør: $("#telefon").val(),
