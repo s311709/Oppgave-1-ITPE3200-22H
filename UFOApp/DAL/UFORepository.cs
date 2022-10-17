@@ -340,8 +340,17 @@ namespace UFOApp.DAL
                 //Sist observert resettes
                 await OppdaterSisteObservasjon(enkeltObservasjonUFO, enkeltObservasjonObservator);
 
-                //Enkeltobservasjon fjernes fra databasen
+                //Enkeltobservasjon og evt UFO og observatør fjernes fra databasen
                 _db.EnkeltObservasjoner.Remove(enkeltObservasjon);
+
+                if (enkeltObservasjonUFO.GangerObservert == 0)
+                {
+                    _db.UFOer.Remove(enkeltObservasjonUFO);
+                }
+                if (enkeltObservasjonObservator.AntallRegistrerteObservasjoner == 0)
+                {
+                    _db.Observatører.Remove(enkeltObservasjonObservator);
+                }
 
                 //Endringer i databasen lagres
                 await _db.SaveChangesAsync();
